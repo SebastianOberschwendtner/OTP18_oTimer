@@ -14,19 +14,19 @@ unsigned char current_val = 0;
 
 int main(void)
 {
-	sys_init();
-	digit_init();
-	input_init();
-	time_init();
-	scheduler_init();
+	init_sys();
+	init_digit();
+	init_input();
+	init_time();
+	init_scheduler();
+	//After all tasks are initialized, the state machine can be initialized
+	init_state_machine();
 
 	schedule(TASK_DIGIT,	1	); 	//Run TASK every tick		(every 1ms)
 	schedule(TASK_INPUT,	2	);	//Run TASK every 2 ticks 	(every 2ms)
 	schedule(TASK_BUTTON,	250	);	//Run TASK every 100 ticks	(every 100ms)
 	schedule(TASK_BLINK,	500	);	//Run TASK every 500 ticks	(every 0.5s)
 	schedule(TASK_COUNT,	1000);	//Run TASK every 1000 ticks	(every 1s)
-
-	adc_t* main_adc = ipc_memory_get(did_INPUT);
 
 	set_interrupts(ON);
 	set_dot(DOT1,TOGGLE);
@@ -42,14 +42,13 @@ int main(void)
 			if(run(TASK_DIGIT,tickpassed))
 			{
 				digit_draw();
+				state_machine();
 			}
 
 			/***************** TASK_INPUT *********************/
 			if(run(TASK_INPUT,tickpassed))
 			{
 				input_sample();
-				char2digit(main_adc->value[current_val]);
-
 			}
 
 			/***************** TASK_BUTTON *********************/
@@ -58,7 +57,7 @@ int main(void)
 				if(button_pressed)
 				{
 					button_pressed = 0;
-					current_val ^= 1;
+					state_machine_notify(EVENT_BUTTONPRESSED);
 				}
 			}
 

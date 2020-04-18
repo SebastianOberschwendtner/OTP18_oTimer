@@ -3,27 +3,27 @@ OTP18_oTimer.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00800100  0000104c  000010e0  2**0
+  0 .data         00000000  00800100  000011e4  00001278  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         0000104c  00000000  00000000  00000094  2**1
+  1 .text         000011e4  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000238  00800100  00800100  000010e0  2**0
+  2 .bss          00000240  00800100  00800100  00001278  2**0
                   ALLOC
-  3 .stab         0000288c  00000000  00000000  000010e0  2**2
+  3 .stab         00002aa8  00000000  00000000  00001278  2**2
                   CONTENTS, READONLY, DEBUGGING
-  4 .stabstr      00001672  00000000  00000000  0000396c  2**0
+  4 .stabstr      000017bc  00000000  00000000  00003d20  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .comment      00000011  00000000  00000000  00004fde  2**0
+  5 .comment      00000011  00000000  00000000  000054dc  2**0
                   CONTENTS, READONLY
-  6 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00004ff0  2**2
+  6 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000054f0  2**2
                   CONTENTS, READONLY
-  7 .debug_info   000005f4  00000000  00000000  0000502c  2**0
+  7 .debug_info   000005f4  00000000  00000000  0000552c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_abbrev 000005a2  00000000  00000000  00005620  2**0
+  8 .debug_abbrev 000005a2  00000000  00000000  00005b20  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_line   0000001d  00000000  00000000  00005bc2  2**0
+  9 .debug_line   0000001d  00000000  00000000  000060c2  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000208  00000000  00000000  00005bdf  2**0
+ 10 .debug_str    00000208  00000000  00000000  000060df  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -33,14 +33,14 @@ Disassembly of section .text:
        4:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
        8:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
        c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
-      10:	0c 94 a0 04 	jmp	0x940	; 0x940 <__vector_4>
+      10:	0c 94 bb 04 	jmp	0x976	; 0x976 <__vector_4>
       14:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
       18:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
       1c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
       20:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
       24:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
       28:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
-      2c:	0c 94 e9 04 	jmp	0x9d2	; 0x9d2 <__vector_11>
+      2c:	0c 94 04 05 	jmp	0xa08	; 0xa08 <__vector_11>
       30:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
       34:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
       38:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
@@ -74,21 +74,21 @@ Disassembly of section .text:
       7c:	1d 92       	st	X+, r1
 
 0000007e <.do_clear_bss_start>:
-      7e:	a8 33       	cpi	r26, 0x38	; 56
+      7e:	a0 34       	cpi	r26, 0x40	; 64
       80:	b2 07       	cpc	r27, r18
       82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
       84:	0e 94 da 03 	call	0x7b4	; 0x7b4 <main>
-      88:	0c 94 24 08 	jmp	0x1048	; 0x1048 <_exit>
+      88:	0c 94 f0 08 	jmp	0x11e0	; 0x11e0 <_exit>
 
 0000008c <__bad_interrupt>:
       8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
-00000090 <digit_init>:
+00000090 <init_digit>:
 
 /*
  * Initialize digits
  */
-void digit_init(void)
+void init_digit(void)
 {
       90:	cf 93       	push	r28
       92:	df 93       	push	r29
@@ -249,7 +249,7 @@ void int2digit(unsigned int data)
      1ac:	9c 01       	movw	r18, r24
      1ae:	a5 ec       	ldi	r26, 0xC5	; 197
      1b0:	b0 e2       	ldi	r27, 0x20	; 32
-     1b2:	0e 94 15 08 	call	0x102a	; 0x102a <__umulhisi3>
+     1b2:	0e 94 e1 08 	call	0x11c2	; 0x11c2 <__umulhisi3>
      1b6:	92 95       	swap	r25
      1b8:	82 95       	swap	r24
      1ba:	8f 70       	andi	r24, 0x0F	; 15
@@ -304,7 +304,7 @@ void int2digit(unsigned int data)
      222:	9c 01       	movw	r18, r24
      224:	ab e7       	ldi	r26, 0x7B	; 123
      226:	b4 e1       	ldi	r27, 0x14	; 20
-     228:	0e 94 15 08 	call	0x102a	; 0x102a <__umulhisi3>
+     228:	0e 94 e1 08 	call	0x11c2	; 0x11c2 <__umulhisi3>
      22c:	96 95       	lsr	r25
      22e:	87 95       	ror	r24
      230:	fa 01       	movw	r30, r20
@@ -345,7 +345,7 @@ void int2digit(unsigned int data)
      278:	9c 01       	movw	r18, r24
      27a:	ad ec       	ldi	r26, 0xCD	; 205
      27c:	bc ec       	ldi	r27, 0xCC	; 204
-     27e:	0e 94 15 08 	call	0x102a	; 0x102a <__umulhisi3>
+     27e:	0e 94 e1 08 	call	0x11c2	; 0x11c2 <__umulhisi3>
      282:	96 95       	lsr	r25
      284:	87 95       	ror	r24
      286:	96 95       	lsr	r25
@@ -694,12 +694,12 @@ void set_dot(unsigned char dot, unsigned char state)
      4b8:	cf 91       	pop	r28
      4ba:	08 95       	ret
 
-000004bc <input_init>:
+000004bc <init_input>:
 
 /*
  * initialize the input peripherals
  */
-void input_init(void)
+void init_input(void)
 {
      4bc:	cf 93       	push	r28
      4be:	df 93       	push	r29
@@ -954,7 +954,7 @@ void input_sample(void)
      64e:	9c 01       	movw	r18, r24
      650:	ad ec       	ldi	r26, 0xCD	; 205
      652:	bc ec       	ldi	r27, 0xCC	; 204
-     654:	0e 94 15 08 	call	0x102a	; 0x102a <__umulhisi3>
+     654:	0e 94 e1 08 	call	0x11c2	; 0x11c2 <__umulhisi3>
      658:	92 95       	swap	r25
      65a:	82 95       	swap	r24
      65c:	8f 70       	andi	r24, 0x0F	; 15
@@ -1169,1369 +1169,1649 @@ int main(void)
 {
      7b4:	cf 93       	push	r28
      7b6:	df 93       	push	r29
-     7b8:	00 d0       	rcall	.+0      	; 0x7ba <main+0x6>
-     7ba:	cd b7       	in	r28, 0x3d	; 61
-     7bc:	de b7       	in	r29, 0x3e	; 62
-	sys_init();
-     7be:	0e 94 64 04 	call	0x8c8	; 0x8c8 <sys_init>
-	digit_init();
-     7c2:	0e 94 48 00 	call	0x90	; 0x90 <digit_init>
-	input_init();
-     7c6:	0e 94 5e 02 	call	0x4bc	; 0x4bc <input_init>
-	time_init();
-     7ca:	0e 94 a2 06 	call	0xd44	; 0xd44 <time_init>
-	scheduler_init();
-     7ce:	0e 94 38 05 	call	0xa70	; 0xa70 <scheduler_init>
+     7b8:	cd b7       	in	r28, 0x3d	; 61
+     7ba:	de b7       	in	r29, 0x3e	; 62
+	init_sys();
+     7bc:	0e 94 52 04 	call	0x8a4	; 0x8a4 <init_sys>
+	init_digit();
+     7c0:	0e 94 48 00 	call	0x90	; 0x90 <init_digit>
+	init_input();
+     7c4:	0e 94 5e 02 	call	0x4bc	; 0x4bc <init_input>
+	init_time();
+     7c8:	0e 94 6e 07 	call	0xedc	; 0xedc <init_time>
+	init_scheduler();
+     7cc:	0e 94 04 06 	call	0xc08	; 0xc08 <init_scheduler>
+	//After all tasks are initialized, the state machine can be initialized
+	init_state_machine();
+     7d0:	0e 94 67 04 	call	0x8ce	; 0x8ce <init_state_machine>
 
 	schedule(TASK_DIGIT,	1	); 	//Run TASK every tick		(every 1ms)
-     7d2:	61 e0       	ldi	r22, 0x01	; 1
-     7d4:	70 e0       	ldi	r23, 0x00	; 0
-     7d6:	80 e0       	ldi	r24, 0x00	; 0
-     7d8:	0e 94 8e 05 	call	0xb1c	; 0xb1c <schedule>
+     7d4:	61 e0       	ldi	r22, 0x01	; 1
+     7d6:	70 e0       	ldi	r23, 0x00	; 0
+     7d8:	80 e0       	ldi	r24, 0x00	; 0
+     7da:	0e 94 5a 06 	call	0xcb4	; 0xcb4 <schedule>
 	schedule(TASK_INPUT,	2	);	//Run TASK every 2 ticks 	(every 2ms)
-     7dc:	62 e0       	ldi	r22, 0x02	; 2
-     7de:	70 e0       	ldi	r23, 0x00	; 0
-     7e0:	81 e0       	ldi	r24, 0x01	; 1
-     7e2:	0e 94 8e 05 	call	0xb1c	; 0xb1c <schedule>
+     7de:	62 e0       	ldi	r22, 0x02	; 2
+     7e0:	70 e0       	ldi	r23, 0x00	; 0
+     7e2:	81 e0       	ldi	r24, 0x01	; 1
+     7e4:	0e 94 5a 06 	call	0xcb4	; 0xcb4 <schedule>
 	schedule(TASK_BUTTON,	250	);	//Run TASK every 100 ticks	(every 100ms)
-     7e6:	6a ef       	ldi	r22, 0xFA	; 250
-     7e8:	70 e0       	ldi	r23, 0x00	; 0
-     7ea:	82 e0       	ldi	r24, 0x02	; 2
-     7ec:	0e 94 8e 05 	call	0xb1c	; 0xb1c <schedule>
+     7e8:	6a ef       	ldi	r22, 0xFA	; 250
+     7ea:	70 e0       	ldi	r23, 0x00	; 0
+     7ec:	82 e0       	ldi	r24, 0x02	; 2
+     7ee:	0e 94 5a 06 	call	0xcb4	; 0xcb4 <schedule>
 	schedule(TASK_BLINK,	500	);	//Run TASK every 500 ticks	(every 0.5s)
-     7f0:	64 ef       	ldi	r22, 0xF4	; 244
-     7f2:	71 e0       	ldi	r23, 0x01	; 1
-     7f4:	83 e0       	ldi	r24, 0x03	; 3
-     7f6:	0e 94 8e 05 	call	0xb1c	; 0xb1c <schedule>
+     7f2:	64 ef       	ldi	r22, 0xF4	; 244
+     7f4:	71 e0       	ldi	r23, 0x01	; 1
+     7f6:	83 e0       	ldi	r24, 0x03	; 3
+     7f8:	0e 94 5a 06 	call	0xcb4	; 0xcb4 <schedule>
 	schedule(TASK_COUNT,	1000);	//Run TASK every 1000 ticks	(every 1s)
-     7fa:	68 ee       	ldi	r22, 0xE8	; 232
-     7fc:	73 e0       	ldi	r23, 0x03	; 3
-     7fe:	84 e0       	ldi	r24, 0x04	; 4
-     800:	0e 94 8e 05 	call	0xb1c	; 0xb1c <schedule>
-
-	adc_t* main_adc = ipc_memory_get(did_INPUT);
-     804:	82 e0       	ldi	r24, 0x02	; 2
-     806:	0e 94 c6 03 	call	0x78c	; 0x78c <ipc_memory_get>
-     80a:	9a 83       	std	Y+2, r25	; 0x02
-     80c:	89 83       	std	Y+1, r24	; 0x01
+     7fc:	68 ee       	ldi	r22, 0xE8	; 232
+     7fe:	73 e0       	ldi	r23, 0x03	; 3
+     800:	84 e0       	ldi	r24, 0x04	; 4
+     802:	0e 94 5a 06 	call	0xcb4	; 0xcb4 <schedule>
 
 	set_interrupts(ON);
-     80e:	81 e0       	ldi	r24, 0x01	; 1
-     810:	0e 94 03 05 	call	0xa06	; 0xa06 <set_interrupts>
+     806:	81 e0       	ldi	r24, 0x01	; 1
+     808:	0e 94 1e 05 	call	0xa3c	; 0xa3c <set_interrupts>
 	set_dot(DOT1,TOGGLE);
-     814:	63 e0       	ldi	r22, 0x03	; 3
-     816:	83 e0       	ldi	r24, 0x03	; 3
-     818:	0e 94 0e 02 	call	0x41c	; 0x41c <set_dot>
+     80c:	63 e0       	ldi	r22, 0x03	; 3
+     80e:	83 e0       	ldi	r24, 0x03	; 3
+     810:	0e 94 0e 02 	call	0x41c	; 0x41c <set_dot>
 
 	while(1)
 	{
 		if(tickpassed)
-     81c:	80 91 06 01 	lds	r24, 0x0106
-     820:	88 23       	and	r24, r24
-     822:	e1 f3       	breq	.-8      	; 0x81c <main+0x68>
+     814:	80 91 06 01 	lds	r24, 0x0106
+     818:	88 23       	and	r24, r24
+     81a:	e1 f3       	breq	.-8      	; 0x814 <main+0x60>
 		{
 			tickpassed = 0;
-     824:	10 92 06 01 	sts	0x0106, r1
+     81c:	10 92 06 01 	sts	0x0106, r1
 			run_scheduler();
-     828:	0e 94 69 06 	call	0xcd2	; 0xcd2 <run_scheduler>
+     820:	0e 94 35 07 	call	0xe6a	; 0xe6a <run_scheduler>
 
 			/***************** TASK_DIGIT *********************/
 			if(run(TASK_DIGIT,tickpassed))
-     82c:	80 91 06 01 	lds	r24, 0x0106
-     830:	68 2f       	mov	r22, r24
-     832:	80 e0       	ldi	r24, 0x00	; 0
-     834:	0e 94 7e 06 	call	0xcfc	; 0xcfc <run>
-     838:	88 23       	and	r24, r24
-     83a:	11 f0       	breq	.+4      	; 0x840 <main+0x8c>
+     824:	80 91 06 01 	lds	r24, 0x0106
+     828:	68 2f       	mov	r22, r24
+     82a:	80 e0       	ldi	r24, 0x00	; 0
+     82c:	0e 94 4a 07 	call	0xe94	; 0xe94 <run>
+     830:	88 23       	and	r24, r24
+     832:	21 f0       	breq	.+8      	; 0x83c <main+0x88>
 			{
 				digit_draw();
-     83c:	0e 94 f8 01 	call	0x3f0	; 0x3f0 <digit_draw>
+     834:	0e 94 f8 01 	call	0x3f0	; 0x3f0 <digit_draw>
+				state_machine();
+     838:	0e 94 53 05 	call	0xaa6	; 0xaa6 <state_machine>
 			}
 
 			/***************** TASK_INPUT *********************/
 			if(run(TASK_INPUT,tickpassed))
-     840:	80 91 06 01 	lds	r24, 0x0106
-     844:	68 2f       	mov	r22, r24
-     846:	81 e0       	ldi	r24, 0x01	; 1
-     848:	0e 94 7e 06 	call	0xcfc	; 0xcfc <run>
-     84c:	88 23       	and	r24, r24
-     84e:	79 f0       	breq	.+30     	; 0x86e <main+0xba>
+     83c:	80 91 06 01 	lds	r24, 0x0106
+     840:	68 2f       	mov	r22, r24
+     842:	81 e0       	ldi	r24, 0x01	; 1
+     844:	0e 94 4a 07 	call	0xe94	; 0xe94 <run>
+     848:	88 23       	and	r24, r24
+     84a:	11 f0       	breq	.+4      	; 0x850 <main+0x9c>
 			{
 				input_sample();
-     850:	0e 94 d6 02 	call	0x5ac	; 0x5ac <input_sample>
-				char2digit(main_adc->value[current_val]);
-     854:	80 91 05 01 	lds	r24, 0x0105
-     858:	88 2f       	mov	r24, r24
-     85a:	90 e0       	ldi	r25, 0x00	; 0
-     85c:	29 81       	ldd	r18, Y+1	; 0x01
-     85e:	3a 81       	ldd	r19, Y+2	; 0x02
-     860:	82 0f       	add	r24, r18
-     862:	93 1f       	adc	r25, r19
-     864:	02 96       	adiw	r24, 0x02	; 2
-     866:	fc 01       	movw	r30, r24
-     868:	80 81       	ld	r24, Z
-     86a:	0e 94 59 00 	call	0xb2	; 0xb2 <char2digit>
-
+     84c:	0e 94 d6 02 	call	0x5ac	; 0x5ac <input_sample>
 			}
 
 			/***************** TASK_BUTTON *********************/
 			if(run(TASK_BUTTON,tickpassed))
-     86e:	80 91 06 01 	lds	r24, 0x0106
-     872:	68 2f       	mov	r22, r24
-     874:	82 e0       	ldi	r24, 0x02	; 2
-     876:	0e 94 7e 06 	call	0xcfc	; 0xcfc <run>
-     87a:	88 23       	and	r24, r24
-     87c:	61 f0       	breq	.+24     	; 0x896 <main+0xe2>
+     850:	80 91 06 01 	lds	r24, 0x0106
+     854:	68 2f       	mov	r22, r24
+     856:	82 e0       	ldi	r24, 0x02	; 2
+     858:	0e 94 4a 07 	call	0xe94	; 0xe94 <run>
+     85c:	88 23       	and	r24, r24
+     85e:	49 f0       	breq	.+18     	; 0x872 <main+0xbe>
 			{
 				if(button_pressed)
-     87e:	80 91 07 01 	lds	r24, 0x0107
-     882:	88 23       	and	r24, r24
-     884:	41 f0       	breq	.+16     	; 0x896 <main+0xe2>
+     860:	80 91 07 01 	lds	r24, 0x0107
+     864:	88 23       	and	r24, r24
+     866:	29 f0       	breq	.+10     	; 0x872 <main+0xbe>
 				{
 					button_pressed = 0;
-     886:	10 92 07 01 	sts	0x0107, r1
-					current_val ^= 1;
-     88a:	90 91 05 01 	lds	r25, 0x0105
-     88e:	81 e0       	ldi	r24, 0x01	; 1
-     890:	89 27       	eor	r24, r25
-     892:	80 93 05 01 	sts	0x0105, r24
+     868:	10 92 07 01 	sts	0x0107, r1
+					state_machine_notify(EVENT_BUTTONPRESSED);
+     86c:	81 e0       	ldi	r24, 0x01	; 1
+     86e:	0e 94 91 05 	call	0xb22	; 0xb22 <state_machine_notify>
 				}
 			}
 
 			/***************** TASK_BLINK *********************/
 			if(run(TASK_BLINK,tickpassed))
-     896:	80 91 06 01 	lds	r24, 0x0106
-     89a:	68 2f       	mov	r22, r24
-     89c:	83 e0       	ldi	r24, 0x03	; 3
-     89e:	0e 94 7e 06 	call	0xcfc	; 0xcfc <run>
-     8a2:	88 23       	and	r24, r24
-     8a4:	21 f0       	breq	.+8      	; 0x8ae <main+0xfa>
+     872:	80 91 06 01 	lds	r24, 0x0106
+     876:	68 2f       	mov	r22, r24
+     878:	83 e0       	ldi	r24, 0x03	; 3
+     87a:	0e 94 4a 07 	call	0xe94	; 0xe94 <run>
+     87e:	88 23       	and	r24, r24
+     880:	21 f0       	breq	.+8      	; 0x88a <main+0xd6>
 			{
 				set_dot(DOT1,TOGGLE);
-     8a6:	63 e0       	ldi	r22, 0x03	; 3
-     8a8:	83 e0       	ldi	r24, 0x03	; 3
-     8aa:	0e 94 0e 02 	call	0x41c	; 0x41c <set_dot>
+     882:	63 e0       	ldi	r22, 0x03	; 3
+     884:	83 e0       	ldi	r24, 0x03	; 3
+     886:	0e 94 0e 02 	call	0x41c	; 0x41c <set_dot>
 			}
 
 			/***************** TASK_COUNT *********************/
 			if(run(TASK_COUNT,tickpassed))
-     8ae:	80 91 06 01 	lds	r24, 0x0106
-     8b2:	68 2f       	mov	r22, r24
-     8b4:	84 e0       	ldi	r24, 0x04	; 4
-     8b6:	0e 94 7e 06 	call	0xcfc	; 0xcfc <run>
-     8ba:	88 23       	and	r24, r24
-     8bc:	09 f4       	brne	.+2      	; 0x8c0 <main+0x10c>
-     8be:	ae cf       	rjmp	.-164    	; 0x81c <main+0x68>
+     88a:	80 91 06 01 	lds	r24, 0x0106
+     88e:	68 2f       	mov	r22, r24
+     890:	84 e0       	ldi	r24, 0x04	; 4
+     892:	0e 94 4a 07 	call	0xe94	; 0xe94 <run>
+     896:	88 23       	and	r24, r24
+     898:	09 f4       	brne	.+2      	; 0x89c <main+0xe8>
+     89a:	bc cf       	rjmp	.-136    	; 0x814 <main+0x60>
 			{
 				time_count(UP);
-     8c0:	80 e0       	ldi	r24, 0x00	; 0
-     8c2:	0e 94 b3 06 	call	0xd66	; 0xd66 <time_count>
+     89c:	80 e0       	ldi	r24, 0x00	; 0
+     89e:	0e 94 7f 07 	call	0xefe	; 0xefe <time_count>
 			}
 		}
 	}
-     8c6:	aa cf       	rjmp	.-172    	; 0x81c <main+0x68>
+     8a2:	b8 cf       	rjmp	.-144    	; 0x814 <main+0x60>
 
-000008c8 <sys_init>:
+000008a4 <init_sys>:
 
 /*
  * initialize the system
  */
-void sys_init(void)
+void init_sys(void)
 {
-     8c8:	cf 93       	push	r28
-     8ca:	df 93       	push	r29
-     8cc:	cd b7       	in	r28, 0x3d	; 61
-     8ce:	de b7       	in	r29, 0x3e	; 62
+     8a4:	cf 93       	push	r28
+     8a6:	df 93       	push	r29
+     8a8:	cd b7       	in	r28, 0x3d	; 61
+     8aa:	de b7       	in	r29, 0x3e	; 62
 	//init IOs
 	init_io();
-     8d0:	0e 94 70 04 	call	0x8e0	; 0x8e0 <init_io>
+     8ac:	0e 94 8b 04 	call	0x916	; 0x916 <init_io>
+
 	//init the systick timer
 	init_timer();
-     8d4:	0e 94 c8 04 	call	0x990	; 0x990 <init_timer>
-};
-     8d8:	00 00       	nop
-     8da:	df 91       	pop	r29
-     8dc:	cf 91       	pop	r28
-     8de:	08 95       	ret
+     8b0:	0e 94 e3 04 	call	0x9c6	; 0x9c6 <init_timer>
 
-000008e0 <init_io>:
+	//register memory
+	system = ipc_memory_register(sizeof(sys_t),did_SYSTEM);
+     8b4:	60 e0       	ldi	r22, 0x00	; 0
+     8b6:	82 e0       	ldi	r24, 0x02	; 2
+     8b8:	90 e0       	ldi	r25, 0x00	; 0
+     8ba:	0e 94 86 03 	call	0x70c	; 0x70c <ipc_memory_register>
+     8be:	90 93 37 03 	sts	0x0337, r25
+     8c2:	80 93 36 03 	sts	0x0336, r24
+};
+     8c6:	00 00       	nop
+     8c8:	df 91       	pop	r29
+     8ca:	cf 91       	pop	r28
+     8cc:	08 95       	ret
+
+000008ce <init_state_machine>:
+/*
+ * initialize the state machine.
+ * Important: Only initialize the state machine after(!) all other tasks are initialized!
+ */
+void init_state_machine(void)
+{
+     8ce:	cf 93       	push	r28
+     8d0:	df 93       	push	r29
+     8d2:	cd b7       	in	r28, 0x3d	; 61
+     8d4:	de b7       	in	r29, 0x3e	; 62
+	//initialize state
+	system->state = STATE_USER_INPUT;
+     8d6:	80 91 36 03 	lds	r24, 0x0336
+     8da:	90 91 37 03 	lds	r25, 0x0337
+     8de:	21 e0       	ldi	r18, 0x01	; 1
+     8e0:	fc 01       	movw	r30, r24
+     8e2:	20 83       	st	Z, r18
+
+	//Get variables of other tasks
+	digit 	= ipc_memory_get(did_DIGIT);
+     8e4:	81 e0       	ldi	r24, 0x01	; 1
+     8e6:	0e 94 c6 03 	call	0x78c	; 0x78c <ipc_memory_get>
+     8ea:	90 93 35 03 	sts	0x0335, r25
+     8ee:	80 93 34 03 	sts	0x0334, r24
+	time 	= ipc_memory_get(did_TIME);
+     8f2:	83 e0       	ldi	r24, 0x03	; 3
+     8f4:	0e 94 c6 03 	call	0x78c	; 0x78c <ipc_memory_get>
+     8f8:	90 93 3b 03 	sts	0x033B, r25
+     8fc:	80 93 3a 03 	sts	0x033A, r24
+	input 	= ipc_memory_get(did_INPUT);
+     900:	82 e0       	ldi	r24, 0x02	; 2
+     902:	0e 94 c6 03 	call	0x78c	; 0x78c <ipc_memory_get>
+     906:	90 93 39 03 	sts	0x0339, r25
+     90a:	80 93 38 03 	sts	0x0338, r24
+};
+     90e:	00 00       	nop
+     910:	df 91       	pop	r29
+     912:	cf 91       	pop	r28
+     914:	08 95       	ret
+
+00000916 <init_io>:
 
 /*
  * initialize the I/Os
  */
 void init_io(void)
 {
-     8e0:	cf 93       	push	r28
-     8e2:	df 93       	push	r29
-     8e4:	cd b7       	in	r28, 0x3d	; 61
-     8e6:	de b7       	in	r29, 0x3e	; 62
+     916:	cf 93       	push	r28
+     918:	df 93       	push	r29
+     91a:	cd b7       	in	r28, 0x3d	; 61
+     91c:	de b7       	in	r29, 0x3e	; 62
 	 * PIN_C				Output		0
 	 * PIN_D				Output		0
 	 * PIN_LATCH			Output		1
 	 * PIN_LIGHT_TEST		Output		1
 	 */
 	DDRB = PIN_LIGHT_TEST | PIN_LATCH | PIN_A | PIN_B | PIN_C | PIN_D;
-     8e8:	84 e2       	ldi	r24, 0x24	; 36
-     8ea:	90 e0       	ldi	r25, 0x00	; 0
-     8ec:	2f e3       	ldi	r18, 0x3F	; 63
-     8ee:	fc 01       	movw	r30, r24
-     8f0:	20 83       	st	Z, r18
+     91e:	84 e2       	ldi	r24, 0x24	; 36
+     920:	90 e0       	ldi	r25, 0x00	; 0
+     922:	2f e3       	ldi	r18, 0x3F	; 63
+     924:	fc 01       	movw	r30, r24
+     926:	20 83       	st	Z, r18
 	DDRC = PIN_ON | PIN_BUZZ | PIN_VIB;
-     8f2:	87 e2       	ldi	r24, 0x27	; 39
-     8f4:	90 e0       	ldi	r25, 0x00	; 0
-     8f6:	24 e3       	ldi	r18, 0x34	; 52
-     8f8:	fc 01       	movw	r30, r24
-     8fa:	20 83       	st	Z, r18
+     928:	87 e2       	ldi	r24, 0x27	; 39
+     92a:	90 e0       	ldi	r25, 0x00	; 0
+     92c:	24 e3       	ldi	r18, 0x34	; 52
+     92e:	fc 01       	movw	r30, r24
+     930:	20 83       	st	Z, r18
 	DDRD = PIN_DOT | PIN_PLUS | PIN_MINUS | PIN_FET_HOUR | PIN_FET_MINUTE_H | PIN_FET_MINUTE_L | PIN_FET_SECONDS | PIN_BLACK;
-     8fc:	8a e2       	ldi	r24, 0x2A	; 42
-     8fe:	90 e0       	ldi	r25, 0x00	; 0
-     900:	2f ef       	ldi	r18, 0xFF	; 255
-     902:	fc 01       	movw	r30, r24
-     904:	20 83       	st	Z, r18
+     932:	8a e2       	ldi	r24, 0x2A	; 42
+     934:	90 e0       	ldi	r25, 0x00	; 0
+     936:	2f ef       	ldi	r18, 0xFF	; 255
+     938:	fc 01       	movw	r30, r24
+     93a:	20 83       	st	Z, r18
 
 	PORTB = PIN_LIGHT_TEST;
-     906:	85 e2       	ldi	r24, 0x25	; 37
-     908:	90 e0       	ldi	r25, 0x00	; 0
-     90a:	20 e2       	ldi	r18, 0x20	; 32
-     90c:	fc 01       	movw	r30, r24
-     90e:	20 83       	st	Z, r18
+     93c:	85 e2       	ldi	r24, 0x25	; 37
+     93e:	90 e0       	ldi	r25, 0x00	; 0
+     940:	20 e2       	ldi	r18, 0x20	; 32
+     942:	fc 01       	movw	r30, r24
+     944:	20 83       	st	Z, r18
 	PORTC = PIN_ON;
-     910:	88 e2       	ldi	r24, 0x28	; 40
-     912:	90 e0       	ldi	r25, 0x00	; 0
-     914:	24 e0       	ldi	r18, 0x04	; 4
-     916:	fc 01       	movw	r30, r24
-     918:	20 83       	st	Z, r18
+     946:	88 e2       	ldi	r24, 0x28	; 40
+     948:	90 e0       	ldi	r25, 0x00	; 0
+     94a:	24 e0       	ldi	r18, 0x04	; 4
+     94c:	fc 01       	movw	r30, r24
+     94e:	20 83       	st	Z, r18
 	PORTD = PIN_BLACK;
-     91a:	8b e2       	ldi	r24, 0x2B	; 43
-     91c:	90 e0       	ldi	r25, 0x00	; 0
-     91e:	20 e8       	ldi	r18, 0x80	; 128
-     920:	fc 01       	movw	r30, r24
-     922:	20 83       	st	Z, r18
+     950:	8b e2       	ldi	r24, 0x2B	; 43
+     952:	90 e0       	ldi	r25, 0x00	; 0
+     954:	20 e8       	ldi	r18, 0x80	; 128
+     956:	fc 01       	movw	r30, r24
+     958:	20 83       	st	Z, r18
 
 	//Enable pin change interrupt on PCINT11 (PIN_SWITCH)
 	PCICR 	= (1<<PCIE1);
-     924:	88 e6       	ldi	r24, 0x68	; 104
-     926:	90 e0       	ldi	r25, 0x00	; 0
-     928:	22 e0       	ldi	r18, 0x02	; 2
-     92a:	fc 01       	movw	r30, r24
-     92c:	20 83       	st	Z, r18
+     95a:	88 e6       	ldi	r24, 0x68	; 104
+     95c:	90 e0       	ldi	r25, 0x00	; 0
+     95e:	22 e0       	ldi	r18, 0x02	; 2
+     960:	fc 01       	movw	r30, r24
+     962:	20 83       	st	Z, r18
 	PCMSK1 	= (1<<PCINT11);
-     92e:	8c e6       	ldi	r24, 0x6C	; 108
-     930:	90 e0       	ldi	r25, 0x00	; 0
-     932:	28 e0       	ldi	r18, 0x08	; 8
-     934:	fc 01       	movw	r30, r24
-     936:	20 83       	st	Z, r18
+     964:	8c e6       	ldi	r24, 0x6C	; 108
+     966:	90 e0       	ldi	r25, 0x00	; 0
+     968:	28 e0       	ldi	r18, 0x08	; 8
+     96a:	fc 01       	movw	r30, r24
+     96c:	20 83       	st	Z, r18
 };
-     938:	00 00       	nop
-     93a:	df 91       	pop	r29
-     93c:	cf 91       	pop	r28
-     93e:	08 95       	ret
+     96e:	00 00       	nop
+     970:	df 91       	pop	r29
+     972:	cf 91       	pop	r28
+     974:	08 95       	ret
 
-00000940 <__vector_4>:
+00000976 <__vector_4>:
 ISR(PCINT1_vect)
 {
-     940:	1f 92       	push	r1
-     942:	0f 92       	push	r0
-     944:	00 90 5f 00 	lds	r0, 0x005F
-     948:	0f 92       	push	r0
-     94a:	11 24       	eor	r1, r1
-     94c:	8f 93       	push	r24
-     94e:	9f 93       	push	r25
-     950:	ef 93       	push	r30
-     952:	ff 93       	push	r31
-     954:	cf 93       	push	r28
-     956:	df 93       	push	r29
-     958:	cd b7       	in	r28, 0x3d	; 61
-     95a:	de b7       	in	r29, 0x3e	; 62
+     976:	1f 92       	push	r1
+     978:	0f 92       	push	r0
+     97a:	00 90 5f 00 	lds	r0, 0x005F
+     97e:	0f 92       	push	r0
+     980:	11 24       	eor	r1, r1
+     982:	8f 93       	push	r24
+     984:	9f 93       	push	r25
+     986:	ef 93       	push	r30
+     988:	ff 93       	push	r31
+     98a:	cf 93       	push	r28
+     98c:	df 93       	push	r29
+     98e:	cd b7       	in	r28, 0x3d	; 61
+     990:	de b7       	in	r29, 0x3e	; 62
 	if(PINC & PIN_SWITCH)
-     95c:	86 e2       	ldi	r24, 0x26	; 38
-     95e:	90 e0       	ldi	r25, 0x00	; 0
-     960:	fc 01       	movw	r30, r24
-     962:	80 81       	ld	r24, Z
-     964:	88 2f       	mov	r24, r24
-     966:	90 e0       	ldi	r25, 0x00	; 0
-     968:	88 70       	andi	r24, 0x08	; 8
-     96a:	99 27       	eor	r25, r25
-     96c:	89 2b       	or	r24, r25
-     96e:	19 f0       	breq	.+6      	; 0x976 <__vector_4+0x36>
+     992:	86 e2       	ldi	r24, 0x26	; 38
+     994:	90 e0       	ldi	r25, 0x00	; 0
+     996:	fc 01       	movw	r30, r24
+     998:	80 81       	ld	r24, Z
+     99a:	88 2f       	mov	r24, r24
+     99c:	90 e0       	ldi	r25, 0x00	; 0
+     99e:	88 70       	andi	r24, 0x08	; 8
+     9a0:	99 27       	eor	r25, r25
+     9a2:	89 2b       	or	r24, r25
+     9a4:	19 f0       	breq	.+6      	; 0x9ac <__vector_4+0x36>
 		button_pressed = 1;
-     970:	81 e0       	ldi	r24, 0x01	; 1
-     972:	80 93 07 01 	sts	0x0107, r24
+     9a6:	81 e0       	ldi	r24, 0x01	; 1
+     9a8:	80 93 07 01 	sts	0x0107, r24
 }
-     976:	00 00       	nop
-     978:	df 91       	pop	r29
-     97a:	cf 91       	pop	r28
-     97c:	ff 91       	pop	r31
-     97e:	ef 91       	pop	r30
-     980:	9f 91       	pop	r25
-     982:	8f 91       	pop	r24
-     984:	0f 90       	pop	r0
-     986:	00 92 5f 00 	sts	0x005F, r0
-     98a:	0f 90       	pop	r0
-     98c:	1f 90       	pop	r1
-     98e:	18 95       	reti
+     9ac:	00 00       	nop
+     9ae:	df 91       	pop	r29
+     9b0:	cf 91       	pop	r28
+     9b2:	ff 91       	pop	r31
+     9b4:	ef 91       	pop	r30
+     9b6:	9f 91       	pop	r25
+     9b8:	8f 91       	pop	r24
+     9ba:	0f 90       	pop	r0
+     9bc:	00 92 5f 00 	sts	0x005F, r0
+     9c0:	0f 90       	pop	r0
+     9c2:	1f 90       	pop	r1
+     9c4:	18 95       	reti
 
-00000990 <init_timer>:
+000009c6 <init_timer>:
 
 /*
  * initialize the timers
  */
 void init_timer(void)
 {
-     990:	cf 93       	push	r28
-     992:	df 93       	push	r29
-     994:	cd b7       	in	r28, 0x3d	; 61
-     996:	de b7       	in	r29, 0x3e	; 62
+     9c6:	cf 93       	push	r28
+     9c8:	df 93       	push	r29
+     9ca:	cd b7       	in	r28, 0x3d	; 61
+     9cc:	de b7       	in	r29, 0x3e	; 62
 	 * Mode: 		CTC
 	 * Prescaler: 	1
 	 * OCR1A:		6999
 	 * t_tick:		1ms
 	 */
 	OCR1A = 6999;
-     998:	88 e8       	ldi	r24, 0x88	; 136
-     99a:	90 e0       	ldi	r25, 0x00	; 0
-     99c:	27 e5       	ldi	r18, 0x57	; 87
-     99e:	3b e1       	ldi	r19, 0x1B	; 27
-     9a0:	fc 01       	movw	r30, r24
-     9a2:	31 83       	std	Z+1, r19	; 0x01
-     9a4:	20 83       	st	Z, r18
+     9ce:	88 e8       	ldi	r24, 0x88	; 136
+     9d0:	90 e0       	ldi	r25, 0x00	; 0
+     9d2:	27 e5       	ldi	r18, 0x57	; 87
+     9d4:	3b e1       	ldi	r19, 0x1B	; 27
+     9d6:	fc 01       	movw	r30, r24
+     9d8:	31 83       	std	Z+1, r19	; 0x01
+     9da:	20 83       	st	Z, r18
 	TCCR1A = 0;
-     9a6:	80 e8       	ldi	r24, 0x80	; 128
-     9a8:	90 e0       	ldi	r25, 0x00	; 0
-     9aa:	fc 01       	movw	r30, r24
-     9ac:	10 82       	st	Z, r1
+     9dc:	80 e8       	ldi	r24, 0x80	; 128
+     9de:	90 e0       	ldi	r25, 0x00	; 0
+     9e0:	fc 01       	movw	r30, r24
+     9e2:	10 82       	st	Z, r1
 	TCCR1B = (1<<WGM12) | (1<<CS10);
-     9ae:	81 e8       	ldi	r24, 0x81	; 129
-     9b0:	90 e0       	ldi	r25, 0x00	; 0
-     9b2:	29 e0       	ldi	r18, 0x09	; 9
-     9b4:	fc 01       	movw	r30, r24
-     9b6:	20 83       	st	Z, r18
+     9e4:	81 e8       	ldi	r24, 0x81	; 129
+     9e6:	90 e0       	ldi	r25, 0x00	; 0
+     9e8:	29 e0       	ldi	r18, 0x09	; 9
+     9ea:	fc 01       	movw	r30, r24
+     9ec:	20 83       	st	Z, r18
 	TCCR1C = 0;
-     9b8:	82 e8       	ldi	r24, 0x82	; 130
-     9ba:	90 e0       	ldi	r25, 0x00	; 0
-     9bc:	fc 01       	movw	r30, r24
-     9be:	10 82       	st	Z, r1
+     9ee:	82 e8       	ldi	r24, 0x82	; 130
+     9f0:	90 e0       	ldi	r25, 0x00	; 0
+     9f2:	fc 01       	movw	r30, r24
+     9f4:	10 82       	st	Z, r1
 	TIMSK1 = (1<<OCIE1A);
-     9c0:	8f e6       	ldi	r24, 0x6F	; 111
-     9c2:	90 e0       	ldi	r25, 0x00	; 0
-     9c4:	22 e0       	ldi	r18, 0x02	; 2
-     9c6:	fc 01       	movw	r30, r24
-     9c8:	20 83       	st	Z, r18
+     9f6:	8f e6       	ldi	r24, 0x6F	; 111
+     9f8:	90 e0       	ldi	r25, 0x00	; 0
+     9fa:	22 e0       	ldi	r18, 0x02	; 2
+     9fc:	fc 01       	movw	r30, r24
+     9fe:	20 83       	st	Z, r18
 };
-     9ca:	00 00       	nop
-     9cc:	df 91       	pop	r29
-     9ce:	cf 91       	pop	r28
-     9d0:	08 95       	ret
+     a00:	00 00       	nop
+     a02:	df 91       	pop	r29
+     a04:	cf 91       	pop	r28
+     a06:	08 95       	ret
 
-000009d2 <__vector_11>:
+00000a08 <__vector_11>:
 ISR(TIMER1_COMPA_vect)
 {
-     9d2:	1f 92       	push	r1
-     9d4:	0f 92       	push	r0
-     9d6:	00 90 5f 00 	lds	r0, 0x005F
-     9da:	0f 92       	push	r0
-     9dc:	11 24       	eor	r1, r1
-     9de:	8f 93       	push	r24
-     9e0:	cf 93       	push	r28
-     9e2:	df 93       	push	r29
-     9e4:	cd b7       	in	r28, 0x3d	; 61
-     9e6:	de b7       	in	r29, 0x3e	; 62
+     a08:	1f 92       	push	r1
+     a0a:	0f 92       	push	r0
+     a0c:	00 90 5f 00 	lds	r0, 0x005F
+     a10:	0f 92       	push	r0
+     a12:	11 24       	eor	r1, r1
+     a14:	8f 93       	push	r24
+     a16:	cf 93       	push	r28
+     a18:	df 93       	push	r29
+     a1a:	cd b7       	in	r28, 0x3d	; 61
+     a1c:	de b7       	in	r29, 0x3e	; 62
 	tickpassed++;
-     9e8:	80 91 06 01 	lds	r24, 0x0106
-     9ec:	8f 5f       	subi	r24, 0xFF	; 255
-     9ee:	80 93 06 01 	sts	0x0106, r24
+     a1e:	80 91 06 01 	lds	r24, 0x0106
+     a22:	8f 5f       	subi	r24, 0xFF	; 255
+     a24:	80 93 06 01 	sts	0x0106, r24
 };
-     9f2:	00 00       	nop
-     9f4:	df 91       	pop	r29
-     9f6:	cf 91       	pop	r28
-     9f8:	8f 91       	pop	r24
-     9fa:	0f 90       	pop	r0
-     9fc:	00 92 5f 00 	sts	0x005F, r0
-     a00:	0f 90       	pop	r0
-     a02:	1f 90       	pop	r1
-     a04:	18 95       	reti
+     a28:	00 00       	nop
+     a2a:	df 91       	pop	r29
+     a2c:	cf 91       	pop	r28
+     a2e:	8f 91       	pop	r24
+     a30:	0f 90       	pop	r0
+     a32:	00 92 5f 00 	sts	0x005F, r0
+     a36:	0f 90       	pop	r0
+     a38:	1f 90       	pop	r1
+     a3a:	18 95       	reti
 
-00000a06 <set_interrupts>:
+00000a3c <set_interrupts>:
 
 /*
  * Set global interrupts
  */
 void set_interrupts(unsigned char state)
 {
-     a06:	cf 93       	push	r28
-     a08:	df 93       	push	r29
-     a0a:	1f 92       	push	r1
-     a0c:	cd b7       	in	r28, 0x3d	; 61
-     a0e:	de b7       	in	r29, 0x3e	; 62
-     a10:	89 83       	std	Y+1, r24	; 0x01
+     a3c:	cf 93       	push	r28
+     a3e:	df 93       	push	r29
+     a40:	1f 92       	push	r1
+     a42:	cd b7       	in	r28, 0x3d	; 61
+     a44:	de b7       	in	r29, 0x3e	; 62
+     a46:	89 83       	std	Y+1, r24	; 0x01
 	if(state == ON)
-     a12:	89 81       	ldd	r24, Y+1	; 0x01
-     a14:	81 30       	cpi	r24, 0x01	; 1
-     a16:	51 f4       	brne	.+20     	; 0xa2c <set_interrupts+0x26>
+     a48:	89 81       	ldd	r24, Y+1	; 0x01
+     a4a:	81 30       	cpi	r24, 0x01	; 1
+     a4c:	51 f4       	brne	.+20     	; 0xa62 <set_interrupts+0x26>
 		SREG |= (1<<SREG_I);
-     a18:	8f e5       	ldi	r24, 0x5F	; 95
-     a1a:	90 e0       	ldi	r25, 0x00	; 0
-     a1c:	2f e5       	ldi	r18, 0x5F	; 95
-     a1e:	30 e0       	ldi	r19, 0x00	; 0
-     a20:	f9 01       	movw	r30, r18
-     a22:	20 81       	ld	r18, Z
-     a24:	20 68       	ori	r18, 0x80	; 128
-     a26:	fc 01       	movw	r30, r24
-     a28:	20 83       	st	Z, r18
+     a4e:	8f e5       	ldi	r24, 0x5F	; 95
+     a50:	90 e0       	ldi	r25, 0x00	; 0
+     a52:	2f e5       	ldi	r18, 0x5F	; 95
+     a54:	30 e0       	ldi	r19, 0x00	; 0
+     a56:	f9 01       	movw	r30, r18
+     a58:	20 81       	ld	r18, Z
+     a5a:	20 68       	ori	r18, 0x80	; 128
+     a5c:	fc 01       	movw	r30, r24
+     a5e:	20 83       	st	Z, r18
 	else if (state == OFF)
 		SREG &= ~(1<<SREG_I);
 };
-     a2a:	0c c0       	rjmp	.+24     	; 0xa44 <set_interrupts+0x3e>
+     a60:	0c c0       	rjmp	.+24     	; 0xa7a <set_interrupts+0x3e>
  */
 void set_interrupts(unsigned char state)
 {
 	if(state == ON)
 		SREG |= (1<<SREG_I);
 	else if (state == OFF)
-     a2c:	89 81       	ldd	r24, Y+1	; 0x01
-     a2e:	88 23       	and	r24, r24
-     a30:	49 f4       	brne	.+18     	; 0xa44 <set_interrupts+0x3e>
+     a62:	89 81       	ldd	r24, Y+1	; 0x01
+     a64:	88 23       	and	r24, r24
+     a66:	49 f4       	brne	.+18     	; 0xa7a <set_interrupts+0x3e>
 		SREG &= ~(1<<SREG_I);
-     a32:	8f e5       	ldi	r24, 0x5F	; 95
-     a34:	90 e0       	ldi	r25, 0x00	; 0
-     a36:	2f e5       	ldi	r18, 0x5F	; 95
-     a38:	30 e0       	ldi	r19, 0x00	; 0
-     a3a:	f9 01       	movw	r30, r18
-     a3c:	20 81       	ld	r18, Z
-     a3e:	2f 77       	andi	r18, 0x7F	; 127
-     a40:	fc 01       	movw	r30, r24
-     a42:	20 83       	st	Z, r18
+     a68:	8f e5       	ldi	r24, 0x5F	; 95
+     a6a:	90 e0       	ldi	r25, 0x00	; 0
+     a6c:	2f e5       	ldi	r18, 0x5F	; 95
+     a6e:	30 e0       	ldi	r19, 0x00	; 0
+     a70:	f9 01       	movw	r30, r18
+     a72:	20 81       	ld	r18, Z
+     a74:	2f 77       	andi	r18, 0x7F	; 127
+     a76:	fc 01       	movw	r30, r24
+     a78:	20 83       	st	Z, r18
 };
-     a44:	00 00       	nop
-     a46:	0f 90       	pop	r0
-     a48:	df 91       	pop	r29
-     a4a:	cf 91       	pop	r28
-     a4c:	08 95       	ret
+     a7a:	00 00       	nop
+     a7c:	0f 90       	pop	r0
+     a7e:	df 91       	pop	r29
+     a80:	cf 91       	pop	r28
+     a82:	08 95       	ret
 
-00000a4e <shutdown>:
+00000a84 <shutdown>:
 
 /*
  * turn off the power
  */
 void shutdown(void)
 {
-     a4e:	cf 93       	push	r28
-     a50:	df 93       	push	r29
-     a52:	cd b7       	in	r28, 0x3d	; 61
-     a54:	de b7       	in	r29, 0x3e	; 62
+     a84:	cf 93       	push	r28
+     a86:	df 93       	push	r29
+     a88:	cd b7       	in	r28, 0x3d	; 61
+     a8a:	de b7       	in	r29, 0x3e	; 62
 	PORTC &= ~PIN_ON;
-     a56:	88 e2       	ldi	r24, 0x28	; 40
-     a58:	90 e0       	ldi	r25, 0x00	; 0
-     a5a:	28 e2       	ldi	r18, 0x28	; 40
-     a5c:	30 e0       	ldi	r19, 0x00	; 0
-     a5e:	f9 01       	movw	r30, r18
-     a60:	20 81       	ld	r18, Z
-     a62:	2b 7f       	andi	r18, 0xFB	; 251
-     a64:	fc 01       	movw	r30, r24
-     a66:	20 83       	st	Z, r18
+     a8c:	88 e2       	ldi	r24, 0x28	; 40
+     a8e:	90 e0       	ldi	r25, 0x00	; 0
+     a90:	28 e2       	ldi	r18, 0x28	; 40
+     a92:	30 e0       	ldi	r19, 0x00	; 0
+     a94:	f9 01       	movw	r30, r18
+     a96:	20 81       	ld	r18, Z
+     a98:	2b 7f       	andi	r18, 0xFB	; 251
+     a9a:	fc 01       	movw	r30, r24
+     a9c:	20 83       	st	Z, r18
 };
-     a68:	00 00       	nop
-     a6a:	df 91       	pop	r29
-     a6c:	cf 91       	pop	r28
-     a6e:	08 95       	ret
+     a9e:	00 00       	nop
+     aa0:	df 91       	pop	r29
+     aa2:	cf 91       	pop	r28
+     aa4:	08 95       	ret
 
-00000a70 <scheduler_init>:
+00000aa6 <state_machine>:
+
+/*
+ * run the state machine
+ */
+void state_machine(void)
+{
+     aa6:	cf 93       	push	r28
+     aa8:	df 93       	push	r29
+     aaa:	cd b7       	in	r28, 0x3d	; 61
+     aac:	de b7       	in	r29, 0x3e	; 62
+	switch(system->state)
+     aae:	80 91 36 03 	lds	r24, 0x0336
+     ab2:	90 91 37 03 	lds	r25, 0x0337
+     ab6:	fc 01       	movw	r30, r24
+     ab8:	80 81       	ld	r24, Z
+     aba:	88 2f       	mov	r24, r24
+     abc:	90 e0       	ldi	r25, 0x00	; 0
+     abe:	82 30       	cpi	r24, 0x02	; 2
+     ac0:	91 05       	cpc	r25, r1
+     ac2:	41 f1       	breq	.+80     	; 0xb14 <state_machine+0x6e>
+     ac4:	83 30       	cpi	r24, 0x03	; 3
+     ac6:	91 05       	cpc	r25, r1
+     ac8:	1c f4       	brge	.+6      	; 0xad0 <state_machine+0x2a>
+     aca:	01 97       	sbiw	r24, 0x01	; 1
+     acc:	39 f0       	breq	.+14     	; 0xadc <state_machine+0x36>
+     ace:	1a c0       	rjmp	.+52     	; 0xb04 <state_machine+0x5e>
+     ad0:	83 30       	cpi	r24, 0x03	; 3
+     ad2:	91 05       	cpc	r25, r1
+     ad4:	81 f0       	breq	.+32     	; 0xaf6 <state_machine+0x50>
+     ad6:	04 97       	sbiw	r24, 0x04	; 4
+     ad8:	f9 f0       	breq	.+62     	; 0xb18 <state_machine+0x72>
+     ada:	14 c0       	rjmp	.+40     	; 0xb04 <state_machine+0x5e>
+	{
+	case STATE_USER_INPUT:
+		//Perform actions for current state
+		char2digit(input->value[0]);
+     adc:	80 91 38 03 	lds	r24, 0x0338
+     ae0:	90 91 39 03 	lds	r25, 0x0339
+     ae4:	fc 01       	movw	r30, r24
+     ae6:	82 81       	ldd	r24, Z+2	; 0x02
+     ae8:	0e 94 59 00 	call	0xb2	; 0xb2 <char2digit>
+
+		//Check for state transitions
+		check_event(EVENT_BUTTONPRESSED,STATE_COUNTING_UP);
+     aec:	63 e0       	ldi	r22, 0x03	; 3
+     aee:	81 e0       	ldi	r24, 0x01	; 1
+     af0:	0e 94 aa 05 	call	0xb54	; 0xb54 <check_event>
+		break;
+     af4:	12 c0       	rjmp	.+36     	; 0xb1a <state_machine+0x74>
+	case STATE_COUNTING_DOWN:
+		break;
+
+	case STATE_COUNTING_UP:
+		//Perform actions for current state
+		time2digit();
+     af6:	0e 94 d8 05 	call	0xbb0	; 0xbb0 <time2digit>
+
+		//Check for state transitions
+		check_event(EVENT_BUTTONPRESSED,STATE_USER_INPUT);
+     afa:	61 e0       	ldi	r22, 0x01	; 1
+     afc:	81 e0       	ldi	r24, 0x01	; 1
+     afe:	0e 94 aa 05 	call	0xb54	; 0xb54 <check_event>
+		break;
+     b02:	0b c0       	rjmp	.+22     	; 0xb1a <state_machine+0x74>
+	case STATE_ALARM:
+		break;
+
+	default:
+		//Return to the user input state
+		system->state = STATE_USER_INPUT;
+     b04:	80 91 36 03 	lds	r24, 0x0336
+     b08:	90 91 37 03 	lds	r25, 0x0337
+     b0c:	21 e0       	ldi	r18, 0x01	; 1
+     b0e:	fc 01       	movw	r30, r24
+     b10:	20 83       	st	Z, r18
+		break;
+     b12:	03 c0       	rjmp	.+6      	; 0xb1a <state_machine+0x74>
+		//Check for state transitions
+		check_event(EVENT_BUTTONPRESSED,STATE_COUNTING_UP);
+		break;
+
+	case STATE_COUNTING_DOWN:
+		break;
+     b14:	00 00       	nop
+     b16:	01 c0       	rjmp	.+2      	; 0xb1a <state_machine+0x74>
+		//Check for state transitions
+		check_event(EVENT_BUTTONPRESSED,STATE_USER_INPUT);
+		break;
+
+	case STATE_ALARM:
+		break;
+     b18:	00 00       	nop
+	default:
+		//Return to the user input state
+		system->state = STATE_USER_INPUT;
+		break;
+	}
+};
+     b1a:	00 00       	nop
+     b1c:	df 91       	pop	r29
+     b1e:	cf 91       	pop	r28
+     b20:	08 95       	ret
+
+00000b22 <state_machine_notify>:
+
+/*
+ * Notify the state machine with a specific event
+ */
+void state_machine_notify(unsigned char event)
+{
+     b22:	cf 93       	push	r28
+     b24:	df 93       	push	r29
+     b26:	1f 92       	push	r1
+     b28:	cd b7       	in	r28, 0x3d	; 61
+     b2a:	de b7       	in	r29, 0x3e	; 62
+     b2c:	89 83       	std	Y+1, r24	; 0x01
+	//Set the event flag with the corresponding bit flag
+	system->event |= event;
+     b2e:	80 91 36 03 	lds	r24, 0x0336
+     b32:	90 91 37 03 	lds	r25, 0x0337
+     b36:	20 91 36 03 	lds	r18, 0x0336
+     b3a:	30 91 37 03 	lds	r19, 0x0337
+     b3e:	f9 01       	movw	r30, r18
+     b40:	31 81       	ldd	r19, Z+1	; 0x01
+     b42:	29 81       	ldd	r18, Y+1	; 0x01
+     b44:	23 2b       	or	r18, r19
+     b46:	fc 01       	movw	r30, r24
+     b48:	21 83       	std	Z+1, r18	; 0x01
+};
+     b4a:	00 00       	nop
+     b4c:	0f 90       	pop	r0
+     b4e:	df 91       	pop	r29
+     b50:	cf 91       	pop	r28
+     b52:	08 95       	ret
+
+00000b54 <check_event>:
+
+/*
+ * Check whether a specific event occurred and go to the specified state
+ */
+void check_event(unsigned char event, unsigned char next_state)
+{
+     b54:	cf 93       	push	r28
+     b56:	df 93       	push	r29
+     b58:	00 d0       	rcall	.+0      	; 0xb5a <check_event+0x6>
+     b5a:	cd b7       	in	r28, 0x3d	; 61
+     b5c:	de b7       	in	r29, 0x3e	; 62
+     b5e:	89 83       	std	Y+1, r24	; 0x01
+     b60:	6a 83       	std	Y+2, r22	; 0x02
+	//check for event flags
+	if(system->event & event)
+     b62:	80 91 36 03 	lds	r24, 0x0336
+     b66:	90 91 37 03 	lds	r25, 0x0337
+     b6a:	fc 01       	movw	r30, r24
+     b6c:	91 81       	ldd	r25, Z+1	; 0x01
+     b6e:	89 81       	ldd	r24, Y+1	; 0x01
+     b70:	89 23       	and	r24, r25
+     b72:	88 23       	and	r24, r24
+     b74:	b9 f0       	breq	.+46     	; 0xba4 <check_event+0x50>
+	{
+		//Clear event flags
+		system->event &= ~event;
+     b76:	80 91 36 03 	lds	r24, 0x0336
+     b7a:	90 91 37 03 	lds	r25, 0x0337
+     b7e:	20 91 36 03 	lds	r18, 0x0336
+     b82:	30 91 37 03 	lds	r19, 0x0337
+     b86:	f9 01       	movw	r30, r18
+     b88:	21 81       	ldd	r18, Z+1	; 0x01
+     b8a:	32 2f       	mov	r19, r18
+     b8c:	29 81       	ldd	r18, Y+1	; 0x01
+     b8e:	20 95       	com	r18
+     b90:	23 23       	and	r18, r19
+     b92:	fc 01       	movw	r30, r24
+     b94:	21 83       	std	Z+1, r18	; 0x01
+		//Goto next sate
+		system->state = next_state;
+     b96:	80 91 36 03 	lds	r24, 0x0336
+     b9a:	90 91 37 03 	lds	r25, 0x0337
+     b9e:	2a 81       	ldd	r18, Y+2	; 0x02
+     ba0:	fc 01       	movw	r30, r24
+     ba2:	20 83       	st	Z, r18
+	}
+};
+     ba4:	00 00       	nop
+     ba6:	0f 90       	pop	r0
+     ba8:	0f 90       	pop	r0
+     baa:	df 91       	pop	r29
+     bac:	cf 91       	pop	r28
+     bae:	08 95       	ret
+
+00000bb0 <time2digit>:
+
+/*
+ * display the current time count
+ */
+void time2digit(void)
+{
+     bb0:	cf 93       	push	r28
+     bb2:	df 93       	push	r29
+     bb4:	cd b7       	in	r28, 0x3d	; 61
+     bb6:	de b7       	in	r29, 0x3e	; 62
+	//decide whether to show 1 seconds or not
+	if(time->hour || (time->minute >10))
+     bb8:	80 91 3a 03 	lds	r24, 0x033A
+     bbc:	90 91 3b 03 	lds	r25, 0x033B
+     bc0:	fc 01       	movw	r30, r24
+     bc2:	80 81       	ld	r24, Z
+     bc4:	88 23       	and	r24, r24
+     bc6:	41 f4       	brne	.+16     	; 0xbd8 <time2digit+0x28>
+     bc8:	80 91 3a 03 	lds	r24, 0x033A
+     bcc:	90 91 3b 03 	lds	r25, 0x033B
+     bd0:	fc 01       	movw	r30, r24
+     bd2:	81 81       	ldd	r24, Z+1	; 0x01
+     bd4:	8b 30       	cpi	r24, 0x0B	; 11
+     bd6:	80 f0       	brcs	.+32     	; 0xbf8 <time2digit+0x48>
+	{
+		//Do not show 1 seconds
+		int2digit(get_time_int()/10);
+     bd8:	0e 94 c2 08 	call	0x1184	; 0x1184 <get_time_int>
+     bdc:	9c 01       	movw	r18, r24
+     bde:	ad ec       	ldi	r26, 0xCD	; 205
+     be0:	bc ec       	ldi	r27, 0xCC	; 204
+     be2:	0e 94 e1 08 	call	0x11c2	; 0x11c2 <__umulhisi3>
+     be6:	96 95       	lsr	r25
+     be8:	87 95       	ror	r24
+     bea:	96 95       	lsr	r25
+     bec:	87 95       	ror	r24
+     bee:	96 95       	lsr	r25
+     bf0:	87 95       	ror	r24
+     bf2:	0e 94 c3 00 	call	0x186	; 0x186 <int2digit>
+     bf6:	04 c0       	rjmp	.+8      	; 0xc00 <time2digit+0x50>
+	}
+	else
+	{
+		//Do show 1 seconds
+		int2digit(get_time_int());
+     bf8:	0e 94 c2 08 	call	0x1184	; 0x1184 <get_time_int>
+     bfc:	0e 94 c3 00 	call	0x186	; 0x186 <int2digit>
+	}
+};
+     c00:	00 00       	nop
+     c02:	df 91       	pop	r29
+     c04:	cf 91       	pop	r28
+     c06:	08 95       	ret
+
+00000c08 <init_scheduler>:
 
 /*
  * initialize the os struct
  */
-void scheduler_init(void)
+void init_scheduler(void)
 {
-     a70:	cf 93       	push	r28
-     a72:	df 93       	push	r29
-     a74:	1f 92       	push	r1
-     a76:	cd b7       	in	r28, 0x3d	; 61
-     a78:	de b7       	in	r29, 0x3e	; 62
+     c08:	cf 93       	push	r28
+     c0a:	df 93       	push	r29
+     c0c:	1f 92       	push	r1
+     c0e:	cd b7       	in	r28, 0x3d	; 61
+     c10:	de b7       	in	r29, 0x3e	; 62
 	//register memory
 	os = ipc_memory_register(sizeof(schedule_t),did_SCHEDULER);
-     a7a:	64 e0       	ldi	r22, 0x04	; 4
-     a7c:	8f e1       	ldi	r24, 0x1F	; 31
-     a7e:	90 e0       	ldi	r25, 0x00	; 0
-     a80:	0e 94 86 03 	call	0x70c	; 0x70c <ipc_memory_register>
-     a84:	90 93 35 03 	sts	0x0335, r25
-     a88:	80 93 34 03 	sts	0x0334, r24
+     c12:	64 e0       	ldi	r22, 0x04	; 4
+     c14:	8f e1       	ldi	r24, 0x1F	; 31
+     c16:	90 e0       	ldi	r25, 0x00	; 0
+     c18:	0e 94 86 03 	call	0x70c	; 0x70c <ipc_memory_register>
+     c1c:	90 93 3d 03 	sts	0x033D, r25
+     c20:	80 93 3c 03 	sts	0x033C, r24
 
 	//initialize the parameters for every task
 	for(unsigned char count=0;count<NUM_TASKS;count++)
-     a8c:	19 82       	std	Y+1, r1	; 0x01
-     a8e:	38 c0       	rjmp	.+112    	; 0xb00 <scheduler_init+0x90>
+     c24:	19 82       	std	Y+1, r1	; 0x01
+     c26:	38 c0       	rjmp	.+112    	; 0xc98 <init_scheduler+0x90>
 	{
 		os->active[count]	= 0; //Task is not active
-     a90:	20 91 34 03 	lds	r18, 0x0334
-     a94:	30 91 35 03 	lds	r19, 0x0335
-     a98:	89 81       	ldd	r24, Y+1	; 0x01
-     a9a:	88 2f       	mov	r24, r24
-     a9c:	90 e0       	ldi	r25, 0x00	; 0
-     a9e:	82 0f       	add	r24, r18
-     aa0:	93 1f       	adc	r25, r19
-     aa2:	fc 01       	movw	r30, r24
-     aa4:	10 82       	st	Z, r1
+     c28:	20 91 3c 03 	lds	r18, 0x033C
+     c2c:	30 91 3d 03 	lds	r19, 0x033D
+     c30:	89 81       	ldd	r24, Y+1	; 0x01
+     c32:	88 2f       	mov	r24, r24
+     c34:	90 e0       	ldi	r25, 0x00	; 0
+     c36:	82 0f       	add	r24, r18
+     c38:	93 1f       	adc	r25, r19
+     c3a:	fc 01       	movw	r30, r24
+     c3c:	10 82       	st	Z, r1
 		os->flag[count]		= 0; //No task wants to run
-     aa6:	20 91 34 03 	lds	r18, 0x0334
-     aaa:	30 91 35 03 	lds	r19, 0x0335
-     aae:	89 81       	ldd	r24, Y+1	; 0x01
-     ab0:	88 2f       	mov	r24, r24
-     ab2:	90 e0       	ldi	r25, 0x00	; 0
-     ab4:	82 0f       	add	r24, r18
-     ab6:	93 1f       	adc	r25, r19
-     ab8:	05 96       	adiw	r24, 0x05	; 5
-     aba:	fc 01       	movw	r30, r24
-     abc:	10 82       	st	Z, r1
+     c3e:	20 91 3c 03 	lds	r18, 0x033C
+     c42:	30 91 3d 03 	lds	r19, 0x033D
+     c46:	89 81       	ldd	r24, Y+1	; 0x01
+     c48:	88 2f       	mov	r24, r24
+     c4a:	90 e0       	ldi	r25, 0x00	; 0
+     c4c:	82 0f       	add	r24, r18
+     c4e:	93 1f       	adc	r25, r19
+     c50:	05 96       	adiw	r24, 0x05	; 5
+     c52:	fc 01       	movw	r30, r24
+     c54:	10 82       	st	Z, r1
 		os->timer[count]		= 0; //Reset the timer of the task
-     abe:	20 91 34 03 	lds	r18, 0x0334
-     ac2:	30 91 35 03 	lds	r19, 0x0335
-     ac6:	89 81       	ldd	r24, Y+1	; 0x01
-     ac8:	88 2f       	mov	r24, r24
-     aca:	90 e0       	ldi	r25, 0x00	; 0
-     acc:	05 96       	adiw	r24, 0x05	; 5
-     ace:	88 0f       	add	r24, r24
-     ad0:	99 1f       	adc	r25, r25
-     ad2:	82 0f       	add	r24, r18
-     ad4:	93 1f       	adc	r25, r19
-     ad6:	fc 01       	movw	r30, r24
-     ad8:	11 82       	std	Z+1, r1	; 0x01
-     ada:	10 82       	st	Z, r1
+     c56:	20 91 3c 03 	lds	r18, 0x033C
+     c5a:	30 91 3d 03 	lds	r19, 0x033D
+     c5e:	89 81       	ldd	r24, Y+1	; 0x01
+     c60:	88 2f       	mov	r24, r24
+     c62:	90 e0       	ldi	r25, 0x00	; 0
+     c64:	05 96       	adiw	r24, 0x05	; 5
+     c66:	88 0f       	add	r24, r24
+     c68:	99 1f       	adc	r25, r25
+     c6a:	82 0f       	add	r24, r18
+     c6c:	93 1f       	adc	r25, r19
+     c6e:	fc 01       	movw	r30, r24
+     c70:	11 82       	std	Z+1, r1	; 0x01
+     c72:	10 82       	st	Z, r1
 		os->schedule[count]	= 0; //Reset the schedule of the task
-     adc:	20 91 34 03 	lds	r18, 0x0334
-     ae0:	30 91 35 03 	lds	r19, 0x0335
-     ae4:	89 81       	ldd	r24, Y+1	; 0x01
-     ae6:	88 2f       	mov	r24, r24
-     ae8:	90 e0       	ldi	r25, 0x00	; 0
-     aea:	0a 96       	adiw	r24, 0x0a	; 10
-     aec:	88 0f       	add	r24, r24
-     aee:	99 1f       	adc	r25, r25
-     af0:	82 0f       	add	r24, r18
-     af2:	93 1f       	adc	r25, r19
-     af4:	fc 01       	movw	r30, r24
-     af6:	11 82       	std	Z+1, r1	; 0x01
-     af8:	10 82       	st	Z, r1
+     c74:	20 91 3c 03 	lds	r18, 0x033C
+     c78:	30 91 3d 03 	lds	r19, 0x033D
+     c7c:	89 81       	ldd	r24, Y+1	; 0x01
+     c7e:	88 2f       	mov	r24, r24
+     c80:	90 e0       	ldi	r25, 0x00	; 0
+     c82:	0a 96       	adiw	r24, 0x0a	; 10
+     c84:	88 0f       	add	r24, r24
+     c86:	99 1f       	adc	r25, r25
+     c88:	82 0f       	add	r24, r18
+     c8a:	93 1f       	adc	r25, r19
+     c8c:	fc 01       	movw	r30, r24
+     c8e:	11 82       	std	Z+1, r1	; 0x01
+     c90:	10 82       	st	Z, r1
 {
 	//register memory
 	os = ipc_memory_register(sizeof(schedule_t),did_SCHEDULER);
 
 	//initialize the parameters for every task
 	for(unsigned char count=0;count<NUM_TASKS;count++)
-     afa:	89 81       	ldd	r24, Y+1	; 0x01
-     afc:	8f 5f       	subi	r24, 0xFF	; 255
-     afe:	89 83       	std	Y+1, r24	; 0x01
-     b00:	89 81       	ldd	r24, Y+1	; 0x01
-     b02:	85 30       	cpi	r24, 0x05	; 5
-     b04:	28 f2       	brcs	.-118    	; 0xa90 <scheduler_init+0x20>
+     c92:	89 81       	ldd	r24, Y+1	; 0x01
+     c94:	8f 5f       	subi	r24, 0xFF	; 255
+     c96:	89 83       	std	Y+1, r24	; 0x01
+     c98:	89 81       	ldd	r24, Y+1	; 0x01
+     c9a:	85 30       	cpi	r24, 0x05	; 5
+     c9c:	28 f2       	brcs	.-118    	; 0xc28 <init_scheduler+0x20>
 		os->active[count]	= 0; //Task is not active
 		os->flag[count]		= 0; //No task wants to run
 		os->timer[count]		= 0; //Reset the timer of the task
 		os->schedule[count]	= 0; //Reset the schedule of the task
 	}
 	os->loop_ovf = 0; //No loop overflow occurred
-     b06:	80 91 34 03 	lds	r24, 0x0334
-     b0a:	90 91 35 03 	lds	r25, 0x0335
-     b0e:	fc 01       	movw	r30, r24
-     b10:	16 8e       	std	Z+30, r1	; 0x1e
+     c9e:	80 91 3c 03 	lds	r24, 0x033C
+     ca2:	90 91 3d 03 	lds	r25, 0x033D
+     ca6:	fc 01       	movw	r30, r24
+     ca8:	16 8e       	std	Z+30, r1	; 0x1e
 };
-     b12:	00 00       	nop
-     b14:	0f 90       	pop	r0
-     b16:	df 91       	pop	r29
-     b18:	cf 91       	pop	r28
-     b1a:	08 95       	ret
+     caa:	00 00       	nop
+     cac:	0f 90       	pop	r0
+     cae:	df 91       	pop	r29
+     cb0:	cf 91       	pop	r28
+     cb2:	08 95       	ret
 
-00000b1c <schedule>:
+00000cb4 <schedule>:
 
 /*
  * schedule one task, the task is automatically set active!
  */
 void schedule(unsigned char task, unsigned int schedule)
 {
-     b1c:	cf 93       	push	r28
-     b1e:	df 93       	push	r29
-     b20:	00 d0       	rcall	.+0      	; 0xb22 <schedule+0x6>
-     b22:	1f 92       	push	r1
-     b24:	cd b7       	in	r28, 0x3d	; 61
-     b26:	de b7       	in	r29, 0x3e	; 62
-     b28:	89 83       	std	Y+1, r24	; 0x01
-     b2a:	7b 83       	std	Y+3, r23	; 0x03
-     b2c:	6a 83       	std	Y+2, r22	; 0x02
+     cb4:	cf 93       	push	r28
+     cb6:	df 93       	push	r29
+     cb8:	00 d0       	rcall	.+0      	; 0xcba <schedule+0x6>
+     cba:	1f 92       	push	r1
+     cbc:	cd b7       	in	r28, 0x3d	; 61
+     cbe:	de b7       	in	r29, 0x3e	; 62
+     cc0:	89 83       	std	Y+1, r24	; 0x01
+     cc2:	7b 83       	std	Y+3, r23	; 0x03
+     cc4:	6a 83       	std	Y+2, r22	; 0x02
 	set_task(task,ACTIVE);	//Set task active
-     b2e:	61 e0       	ldi	r22, 0x01	; 1
-     b30:	89 81       	ldd	r24, Y+1	; 0x01
-     b32:	0e 94 c4 05 	call	0xb88	; 0xb88 <set_task>
+     cc6:	61 e0       	ldi	r22, 0x01	; 1
+     cc8:	89 81       	ldd	r24, Y+1	; 0x01
+     cca:	0e 94 90 06 	call	0xd20	; 0xd20 <set_task>
 	os->schedule[task] = schedule; //Update schedule
-     b36:	20 91 34 03 	lds	r18, 0x0334
-     b3a:	30 91 35 03 	lds	r19, 0x0335
-     b3e:	89 81       	ldd	r24, Y+1	; 0x01
-     b40:	88 2f       	mov	r24, r24
-     b42:	90 e0       	ldi	r25, 0x00	; 0
-     b44:	0a 96       	adiw	r24, 0x0a	; 10
-     b46:	88 0f       	add	r24, r24
-     b48:	99 1f       	adc	r25, r25
-     b4a:	82 0f       	add	r24, r18
-     b4c:	93 1f       	adc	r25, r19
-     b4e:	2a 81       	ldd	r18, Y+2	; 0x02
-     b50:	3b 81       	ldd	r19, Y+3	; 0x03
-     b52:	fc 01       	movw	r30, r24
-     b54:	31 83       	std	Z+1, r19	; 0x01
-     b56:	20 83       	st	Z, r18
+     cce:	20 91 3c 03 	lds	r18, 0x033C
+     cd2:	30 91 3d 03 	lds	r19, 0x033D
+     cd6:	89 81       	ldd	r24, Y+1	; 0x01
+     cd8:	88 2f       	mov	r24, r24
+     cda:	90 e0       	ldi	r25, 0x00	; 0
+     cdc:	0a 96       	adiw	r24, 0x0a	; 10
+     cde:	88 0f       	add	r24, r24
+     ce0:	99 1f       	adc	r25, r25
+     ce2:	82 0f       	add	r24, r18
+     ce4:	93 1f       	adc	r25, r19
+     ce6:	2a 81       	ldd	r18, Y+2	; 0x02
+     ce8:	3b 81       	ldd	r19, Y+3	; 0x03
+     cea:	fc 01       	movw	r30, r24
+     cec:	31 83       	std	Z+1, r19	; 0x01
+     cee:	20 83       	st	Z, r18
 	os->timer[task]	  = schedule; //Reload the timer
-     b58:	20 91 34 03 	lds	r18, 0x0334
-     b5c:	30 91 35 03 	lds	r19, 0x0335
-     b60:	89 81       	ldd	r24, Y+1	; 0x01
-     b62:	88 2f       	mov	r24, r24
-     b64:	90 e0       	ldi	r25, 0x00	; 0
-     b66:	05 96       	adiw	r24, 0x05	; 5
-     b68:	88 0f       	add	r24, r24
-     b6a:	99 1f       	adc	r25, r25
-     b6c:	82 0f       	add	r24, r18
-     b6e:	93 1f       	adc	r25, r19
-     b70:	2a 81       	ldd	r18, Y+2	; 0x02
-     b72:	3b 81       	ldd	r19, Y+3	; 0x03
-     b74:	fc 01       	movw	r30, r24
-     b76:	31 83       	std	Z+1, r19	; 0x01
-     b78:	20 83       	st	Z, r18
+     cf0:	20 91 3c 03 	lds	r18, 0x033C
+     cf4:	30 91 3d 03 	lds	r19, 0x033D
+     cf8:	89 81       	ldd	r24, Y+1	; 0x01
+     cfa:	88 2f       	mov	r24, r24
+     cfc:	90 e0       	ldi	r25, 0x00	; 0
+     cfe:	05 96       	adiw	r24, 0x05	; 5
+     d00:	88 0f       	add	r24, r24
+     d02:	99 1f       	adc	r25, r25
+     d04:	82 0f       	add	r24, r18
+     d06:	93 1f       	adc	r25, r19
+     d08:	2a 81       	ldd	r18, Y+2	; 0x02
+     d0a:	3b 81       	ldd	r19, Y+3	; 0x03
+     d0c:	fc 01       	movw	r30, r24
+     d0e:	31 83       	std	Z+1, r19	; 0x01
+     d10:	20 83       	st	Z, r18
 };
-     b7a:	00 00       	nop
-     b7c:	0f 90       	pop	r0
-     b7e:	0f 90       	pop	r0
-     b80:	0f 90       	pop	r0
-     b82:	df 91       	pop	r29
-     b84:	cf 91       	pop	r28
-     b86:	08 95       	ret
+     d12:	00 00       	nop
+     d14:	0f 90       	pop	r0
+     d16:	0f 90       	pop	r0
+     d18:	0f 90       	pop	r0
+     d1a:	df 91       	pop	r29
+     d1c:	cf 91       	pop	r28
+     d1e:	08 95       	ret
 
-00000b88 <set_task>:
+00000d20 <set_task>:
 
 /*
  * Set a task active or inactive
  */
 void set_task(unsigned char task, unsigned char state)
 {
-     b88:	cf 93       	push	r28
-     b8a:	df 93       	push	r29
-     b8c:	00 d0       	rcall	.+0      	; 0xb8e <set_task+0x6>
-     b8e:	cd b7       	in	r28, 0x3d	; 61
-     b90:	de b7       	in	r29, 0x3e	; 62
-     b92:	89 83       	std	Y+1, r24	; 0x01
-     b94:	6a 83       	std	Y+2, r22	; 0x02
+     d20:	cf 93       	push	r28
+     d22:	df 93       	push	r29
+     d24:	00 d0       	rcall	.+0      	; 0xd26 <set_task+0x6>
+     d26:	cd b7       	in	r28, 0x3d	; 61
+     d28:	de b7       	in	r29, 0x3e	; 62
+     d2a:	89 83       	std	Y+1, r24	; 0x01
+     d2c:	6a 83       	std	Y+2, r22	; 0x02
 	os->active[task] = state;
-     b96:	20 91 34 03 	lds	r18, 0x0334
-     b9a:	30 91 35 03 	lds	r19, 0x0335
-     b9e:	89 81       	ldd	r24, Y+1	; 0x01
-     ba0:	88 2f       	mov	r24, r24
-     ba2:	90 e0       	ldi	r25, 0x00	; 0
-     ba4:	82 0f       	add	r24, r18
-     ba6:	93 1f       	adc	r25, r19
-     ba8:	2a 81       	ldd	r18, Y+2	; 0x02
-     baa:	fc 01       	movw	r30, r24
-     bac:	20 83       	st	Z, r18
+     d2e:	20 91 3c 03 	lds	r18, 0x033C
+     d32:	30 91 3d 03 	lds	r19, 0x033D
+     d36:	89 81       	ldd	r24, Y+1	; 0x01
+     d38:	88 2f       	mov	r24, r24
+     d3a:	90 e0       	ldi	r25, 0x00	; 0
+     d3c:	82 0f       	add	r24, r18
+     d3e:	93 1f       	adc	r25, r19
+     d40:	2a 81       	ldd	r18, Y+2	; 0x02
+     d42:	fc 01       	movw	r30, r24
+     d44:	20 83       	st	Z, r18
 };
-     bae:	00 00       	nop
-     bb0:	0f 90       	pop	r0
-     bb2:	0f 90       	pop	r0
-     bb4:	df 91       	pop	r29
-     bb6:	cf 91       	pop	r28
-     bb8:	08 95       	ret
+     d46:	00 00       	nop
+     d48:	0f 90       	pop	r0
+     d4a:	0f 90       	pop	r0
+     d4c:	df 91       	pop	r29
+     d4e:	cf 91       	pop	r28
+     d50:	08 95       	ret
 
-00000bba <count_task>:
+00000d52 <count_task>:
 
 /*
  * Calculate the run flag for one task
  */
 void count_task(unsigned char task)
 {
-     bba:	cf 93       	push	r28
-     bbc:	df 93       	push	r29
-     bbe:	1f 92       	push	r1
-     bc0:	cd b7       	in	r28, 0x3d	; 61
-     bc2:	de b7       	in	r29, 0x3e	; 62
-     bc4:	89 83       	std	Y+1, r24	; 0x01
+     d52:	cf 93       	push	r28
+     d54:	df 93       	push	r29
+     d56:	1f 92       	push	r1
+     d58:	cd b7       	in	r28, 0x3d	; 61
+     d5a:	de b7       	in	r29, 0x3e	; 62
+     d5c:	89 83       	std	Y+1, r24	; 0x01
 	if(os->active[task]) 	//only execute when task is active
-     bc6:	20 91 34 03 	lds	r18, 0x0334
-     bca:	30 91 35 03 	lds	r19, 0x0335
-     bce:	89 81       	ldd	r24, Y+1	; 0x01
-     bd0:	88 2f       	mov	r24, r24
-     bd2:	90 e0       	ldi	r25, 0x00	; 0
-     bd4:	82 0f       	add	r24, r18
-     bd6:	93 1f       	adc	r25, r19
-     bd8:	fc 01       	movw	r30, r24
-     bda:	80 81       	ld	r24, Z
-     bdc:	88 23       	and	r24, r24
-     bde:	09 f4       	brne	.+2      	; 0xbe2 <count_task+0x28>
-     be0:	67 c0       	rjmp	.+206    	; 0xcb0 <count_task+0xf6>
+     d5e:	20 91 3c 03 	lds	r18, 0x033C
+     d62:	30 91 3d 03 	lds	r19, 0x033D
+     d66:	89 81       	ldd	r24, Y+1	; 0x01
+     d68:	88 2f       	mov	r24, r24
+     d6a:	90 e0       	ldi	r25, 0x00	; 0
+     d6c:	82 0f       	add	r24, r18
+     d6e:	93 1f       	adc	r25, r19
+     d70:	fc 01       	movw	r30, r24
+     d72:	80 81       	ld	r24, Z
+     d74:	88 23       	and	r24, r24
+     d76:	09 f4       	brne	.+2      	; 0xd7a <count_task+0x28>
+     d78:	67 c0       	rjmp	.+206    	; 0xe48 <count_task+0xf6>
 	{
 		os->timer[task]--;	  	//update the timer count
-     be2:	80 91 34 03 	lds	r24, 0x0334
-     be6:	90 91 35 03 	lds	r25, 0x0335
-     bea:	29 81       	ldd	r18, Y+1	; 0x01
-     bec:	22 2f       	mov	r18, r18
-     bee:	30 e0       	ldi	r19, 0x00	; 0
-     bf0:	a9 01       	movw	r20, r18
-     bf2:	4b 5f       	subi	r20, 0xFB	; 251
-     bf4:	5f 4f       	sbci	r21, 0xFF	; 255
-     bf6:	44 0f       	add	r20, r20
-     bf8:	55 1f       	adc	r21, r21
-     bfa:	48 0f       	add	r20, r24
-     bfc:	59 1f       	adc	r21, r25
-     bfe:	fa 01       	movw	r30, r20
-     c00:	40 81       	ld	r20, Z
-     c02:	51 81       	ldd	r21, Z+1	; 0x01
-     c04:	41 50       	subi	r20, 0x01	; 1
-     c06:	51 09       	sbc	r21, r1
-     c08:	2b 5f       	subi	r18, 0xFB	; 251
-     c0a:	3f 4f       	sbci	r19, 0xFF	; 255
-     c0c:	22 0f       	add	r18, r18
-     c0e:	33 1f       	adc	r19, r19
-     c10:	82 0f       	add	r24, r18
-     c12:	93 1f       	adc	r25, r19
-     c14:	fc 01       	movw	r30, r24
-     c16:	51 83       	std	Z+1, r21	; 0x01
-     c18:	40 83       	st	Z, r20
+     d7a:	80 91 3c 03 	lds	r24, 0x033C
+     d7e:	90 91 3d 03 	lds	r25, 0x033D
+     d82:	29 81       	ldd	r18, Y+1	; 0x01
+     d84:	22 2f       	mov	r18, r18
+     d86:	30 e0       	ldi	r19, 0x00	; 0
+     d88:	a9 01       	movw	r20, r18
+     d8a:	4b 5f       	subi	r20, 0xFB	; 251
+     d8c:	5f 4f       	sbci	r21, 0xFF	; 255
+     d8e:	44 0f       	add	r20, r20
+     d90:	55 1f       	adc	r21, r21
+     d92:	48 0f       	add	r20, r24
+     d94:	59 1f       	adc	r21, r25
+     d96:	fa 01       	movw	r30, r20
+     d98:	40 81       	ld	r20, Z
+     d9a:	51 81       	ldd	r21, Z+1	; 0x01
+     d9c:	41 50       	subi	r20, 0x01	; 1
+     d9e:	51 09       	sbc	r21, r1
+     da0:	2b 5f       	subi	r18, 0xFB	; 251
+     da2:	3f 4f       	sbci	r19, 0xFF	; 255
+     da4:	22 0f       	add	r18, r18
+     da6:	33 1f       	adc	r19, r19
+     da8:	82 0f       	add	r24, r18
+     daa:	93 1f       	adc	r25, r19
+     dac:	fc 01       	movw	r30, r24
+     dae:	51 83       	std	Z+1, r21	; 0x01
+     db0:	40 83       	st	Z, r20
 		if(os->timer[task] == 0) //When the timer is finished, the task wants to execute
-     c1a:	20 91 34 03 	lds	r18, 0x0334
-     c1e:	30 91 35 03 	lds	r19, 0x0335
-     c22:	89 81       	ldd	r24, Y+1	; 0x01
-     c24:	88 2f       	mov	r24, r24
-     c26:	90 e0       	ldi	r25, 0x00	; 0
-     c28:	05 96       	adiw	r24, 0x05	; 5
-     c2a:	88 0f       	add	r24, r24
-     c2c:	99 1f       	adc	r25, r25
-     c2e:	82 0f       	add	r24, r18
-     c30:	93 1f       	adc	r25, r19
-     c32:	fc 01       	movw	r30, r24
-     c34:	80 81       	ld	r24, Z
-     c36:	91 81       	ldd	r25, Z+1	; 0x01
-     c38:	89 2b       	or	r24, r25
-     c3a:	69 f5       	brne	.+90     	; 0xc96 <count_task+0xdc>
+     db2:	20 91 3c 03 	lds	r18, 0x033C
+     db6:	30 91 3d 03 	lds	r19, 0x033D
+     dba:	89 81       	ldd	r24, Y+1	; 0x01
+     dbc:	88 2f       	mov	r24, r24
+     dbe:	90 e0       	ldi	r25, 0x00	; 0
+     dc0:	05 96       	adiw	r24, 0x05	; 5
+     dc2:	88 0f       	add	r24, r24
+     dc4:	99 1f       	adc	r25, r25
+     dc6:	82 0f       	add	r24, r18
+     dc8:	93 1f       	adc	r25, r19
+     dca:	fc 01       	movw	r30, r24
+     dcc:	80 81       	ld	r24, Z
+     dce:	91 81       	ldd	r25, Z+1	; 0x01
+     dd0:	89 2b       	or	r24, r25
+     dd2:	69 f5       	brne	.+90     	; 0xe2e <count_task+0xdc>
 		{
 			os->timer[task] = os->schedule[task]; //Reload the timer with the schedule value
-     c3c:	40 91 34 03 	lds	r20, 0x0334
-     c40:	50 91 35 03 	lds	r21, 0x0335
-     c44:	89 81       	ldd	r24, Y+1	; 0x01
-     c46:	88 2f       	mov	r24, r24
-     c48:	90 e0       	ldi	r25, 0x00	; 0
-     c4a:	60 91 34 03 	lds	r22, 0x0334
-     c4e:	70 91 35 03 	lds	r23, 0x0335
-     c52:	29 81       	ldd	r18, Y+1	; 0x01
-     c54:	22 2f       	mov	r18, r18
-     c56:	30 e0       	ldi	r19, 0x00	; 0
-     c58:	26 5f       	subi	r18, 0xF6	; 246
-     c5a:	3f 4f       	sbci	r19, 0xFF	; 255
-     c5c:	22 0f       	add	r18, r18
-     c5e:	33 1f       	adc	r19, r19
-     c60:	26 0f       	add	r18, r22
-     c62:	37 1f       	adc	r19, r23
-     c64:	f9 01       	movw	r30, r18
-     c66:	20 81       	ld	r18, Z
-     c68:	31 81       	ldd	r19, Z+1	; 0x01
-     c6a:	05 96       	adiw	r24, 0x05	; 5
-     c6c:	88 0f       	add	r24, r24
-     c6e:	99 1f       	adc	r25, r25
-     c70:	84 0f       	add	r24, r20
-     c72:	95 1f       	adc	r25, r21
-     c74:	fc 01       	movw	r30, r24
-     c76:	31 83       	std	Z+1, r19	; 0x01
-     c78:	20 83       	st	Z, r18
+     dd4:	40 91 3c 03 	lds	r20, 0x033C
+     dd8:	50 91 3d 03 	lds	r21, 0x033D
+     ddc:	89 81       	ldd	r24, Y+1	; 0x01
+     dde:	88 2f       	mov	r24, r24
+     de0:	90 e0       	ldi	r25, 0x00	; 0
+     de2:	60 91 3c 03 	lds	r22, 0x033C
+     de6:	70 91 3d 03 	lds	r23, 0x033D
+     dea:	29 81       	ldd	r18, Y+1	; 0x01
+     dec:	22 2f       	mov	r18, r18
+     dee:	30 e0       	ldi	r19, 0x00	; 0
+     df0:	26 5f       	subi	r18, 0xF6	; 246
+     df2:	3f 4f       	sbci	r19, 0xFF	; 255
+     df4:	22 0f       	add	r18, r18
+     df6:	33 1f       	adc	r19, r19
+     df8:	26 0f       	add	r18, r22
+     dfa:	37 1f       	adc	r19, r23
+     dfc:	f9 01       	movw	r30, r18
+     dfe:	20 81       	ld	r18, Z
+     e00:	31 81       	ldd	r19, Z+1	; 0x01
+     e02:	05 96       	adiw	r24, 0x05	; 5
+     e04:	88 0f       	add	r24, r24
+     e06:	99 1f       	adc	r25, r25
+     e08:	84 0f       	add	r24, r20
+     e0a:	95 1f       	adc	r25, r21
+     e0c:	fc 01       	movw	r30, r24
+     e0e:	31 83       	std	Z+1, r19	; 0x01
+     e10:	20 83       	st	Z, r18
 			os->flag[task] = 1;	//Set the flag for the task
-     c7a:	20 91 34 03 	lds	r18, 0x0334
-     c7e:	30 91 35 03 	lds	r19, 0x0335
-     c82:	89 81       	ldd	r24, Y+1	; 0x01
-     c84:	88 2f       	mov	r24, r24
-     c86:	90 e0       	ldi	r25, 0x00	; 0
-     c88:	82 0f       	add	r24, r18
-     c8a:	93 1f       	adc	r25, r19
-     c8c:	05 96       	adiw	r24, 0x05	; 5
-     c8e:	21 e0       	ldi	r18, 0x01	; 1
-     c90:	fc 01       	movw	r30, r24
-     c92:	20 83       	st	Z, r18
+     e12:	20 91 3c 03 	lds	r18, 0x033C
+     e16:	30 91 3d 03 	lds	r19, 0x033D
+     e1a:	89 81       	ldd	r24, Y+1	; 0x01
+     e1c:	88 2f       	mov	r24, r24
+     e1e:	90 e0       	ldi	r25, 0x00	; 0
+     e20:	82 0f       	add	r24, r18
+     e22:	93 1f       	adc	r25, r19
+     e24:	05 96       	adiw	r24, 0x05	; 5
+     e26:	21 e0       	ldi	r18, 0x01	; 1
+     e28:	fc 01       	movw	r30, r24
+     e2a:	20 83       	st	Z, r18
 		else					//when the timer is not finished, the task does not want to run
 			os->flag[task] = 0;	//Do not set the flag
 	}
 	else
 		os->flag[task] = 0;	//Do not set the flag
 };
-     c94:	19 c0       	rjmp	.+50     	; 0xcc8 <count_task+0x10e>
+     e2c:	19 c0       	rjmp	.+50     	; 0xe60 <count_task+0x10e>
 		{
 			os->timer[task] = os->schedule[task]; //Reload the timer with the schedule value
 			os->flag[task] = 1;	//Set the flag for the task
 		}
 		else					//when the timer is not finished, the task does not want to run
 			os->flag[task] = 0;	//Do not set the flag
-     c96:	20 91 34 03 	lds	r18, 0x0334
-     c9a:	30 91 35 03 	lds	r19, 0x0335
-     c9e:	89 81       	ldd	r24, Y+1	; 0x01
-     ca0:	88 2f       	mov	r24, r24
-     ca2:	90 e0       	ldi	r25, 0x00	; 0
-     ca4:	82 0f       	add	r24, r18
-     ca6:	93 1f       	adc	r25, r19
-     ca8:	05 96       	adiw	r24, 0x05	; 5
-     caa:	fc 01       	movw	r30, r24
-     cac:	10 82       	st	Z, r1
+     e2e:	20 91 3c 03 	lds	r18, 0x033C
+     e32:	30 91 3d 03 	lds	r19, 0x033D
+     e36:	89 81       	ldd	r24, Y+1	; 0x01
+     e38:	88 2f       	mov	r24, r24
+     e3a:	90 e0       	ldi	r25, 0x00	; 0
+     e3c:	82 0f       	add	r24, r18
+     e3e:	93 1f       	adc	r25, r19
+     e40:	05 96       	adiw	r24, 0x05	; 5
+     e42:	fc 01       	movw	r30, r24
+     e44:	10 82       	st	Z, r1
 	}
 	else
 		os->flag[task] = 0;	//Do not set the flag
 };
-     cae:	0c c0       	rjmp	.+24     	; 0xcc8 <count_task+0x10e>
+     e46:	0c c0       	rjmp	.+24     	; 0xe60 <count_task+0x10e>
 		}
 		else					//when the timer is not finished, the task does not want to run
 			os->flag[task] = 0;	//Do not set the flag
 	}
 	else
 		os->flag[task] = 0;	//Do not set the flag
-     cb0:	20 91 34 03 	lds	r18, 0x0334
-     cb4:	30 91 35 03 	lds	r19, 0x0335
-     cb8:	89 81       	ldd	r24, Y+1	; 0x01
-     cba:	88 2f       	mov	r24, r24
-     cbc:	90 e0       	ldi	r25, 0x00	; 0
-     cbe:	82 0f       	add	r24, r18
-     cc0:	93 1f       	adc	r25, r19
-     cc2:	05 96       	adiw	r24, 0x05	; 5
-     cc4:	fc 01       	movw	r30, r24
-     cc6:	10 82       	st	Z, r1
+     e48:	20 91 3c 03 	lds	r18, 0x033C
+     e4c:	30 91 3d 03 	lds	r19, 0x033D
+     e50:	89 81       	ldd	r24, Y+1	; 0x01
+     e52:	88 2f       	mov	r24, r24
+     e54:	90 e0       	ldi	r25, 0x00	; 0
+     e56:	82 0f       	add	r24, r18
+     e58:	93 1f       	adc	r25, r19
+     e5a:	05 96       	adiw	r24, 0x05	; 5
+     e5c:	fc 01       	movw	r30, r24
+     e5e:	10 82       	st	Z, r1
 };
-     cc8:	00 00       	nop
-     cca:	0f 90       	pop	r0
-     ccc:	df 91       	pop	r29
-     cce:	cf 91       	pop	r28
-     cd0:	08 95       	ret
+     e60:	00 00       	nop
+     e62:	0f 90       	pop	r0
+     e64:	df 91       	pop	r29
+     e66:	cf 91       	pop	r28
+     e68:	08 95       	ret
 
-00000cd2 <run_scheduler>:
+00000e6a <run_scheduler>:
 
 /*
  * calculate the scheduling
  */
 void run_scheduler(void)
 {
-     cd2:	cf 93       	push	r28
-     cd4:	df 93       	push	r29
-     cd6:	1f 92       	push	r1
-     cd8:	cd b7       	in	r28, 0x3d	; 61
-     cda:	de b7       	in	r29, 0x3e	; 62
+     e6a:	cf 93       	push	r28
+     e6c:	df 93       	push	r29
+     e6e:	1f 92       	push	r1
+     e70:	cd b7       	in	r28, 0x3d	; 61
+     e72:	de b7       	in	r29, 0x3e	; 62
 	for(unsigned char task = 0;task<NUM_TASKS;task++)
-     cdc:	19 82       	std	Y+1, r1	; 0x01
-     cde:	06 c0       	rjmp	.+12     	; 0xcec <run_scheduler+0x1a>
+     e74:	19 82       	std	Y+1, r1	; 0x01
+     e76:	06 c0       	rjmp	.+12     	; 0xe84 <run_scheduler+0x1a>
 		count_task(task);
-     ce0:	89 81       	ldd	r24, Y+1	; 0x01
-     ce2:	0e 94 dd 05 	call	0xbba	; 0xbba <count_task>
+     e78:	89 81       	ldd	r24, Y+1	; 0x01
+     e7a:	0e 94 a9 06 	call	0xd52	; 0xd52 <count_task>
 /*
  * calculate the scheduling
  */
 void run_scheduler(void)
 {
 	for(unsigned char task = 0;task<NUM_TASKS;task++)
-     ce6:	89 81       	ldd	r24, Y+1	; 0x01
-     ce8:	8f 5f       	subi	r24, 0xFF	; 255
-     cea:	89 83       	std	Y+1, r24	; 0x01
-     cec:	89 81       	ldd	r24, Y+1	; 0x01
-     cee:	85 30       	cpi	r24, 0x05	; 5
-     cf0:	b8 f3       	brcs	.-18     	; 0xce0 <run_scheduler+0xe>
+     e7e:	89 81       	ldd	r24, Y+1	; 0x01
+     e80:	8f 5f       	subi	r24, 0xFF	; 255
+     e82:	89 83       	std	Y+1, r24	; 0x01
+     e84:	89 81       	ldd	r24, Y+1	; 0x01
+     e86:	85 30       	cpi	r24, 0x05	; 5
+     e88:	b8 f3       	brcs	.-18     	; 0xe78 <run_scheduler+0xe>
 		count_task(task);
 };
-     cf2:	00 00       	nop
-     cf4:	0f 90       	pop	r0
-     cf6:	df 91       	pop	r29
-     cf8:	cf 91       	pop	r28
-     cfa:	08 95       	ret
+     e8a:	00 00       	nop
+     e8c:	0f 90       	pop	r0
+     e8e:	df 91       	pop	r29
+     e90:	cf 91       	pop	r28
+     e92:	08 95       	ret
 
-00000cfc <run>:
+00000e94 <run>:
 
 /*
  * Perform the scheduling and decide whether to run the specified task
  */
 unsigned char run(unsigned char task, unsigned char tickstate)
 {
-     cfc:	cf 93       	push	r28
-     cfe:	df 93       	push	r29
-     d00:	00 d0       	rcall	.+0      	; 0xd02 <run+0x6>
-     d02:	cd b7       	in	r28, 0x3d	; 61
-     d04:	de b7       	in	r29, 0x3e	; 62
-     d06:	89 83       	std	Y+1, r24	; 0x01
-     d08:	6a 83       	std	Y+2, r22	; 0x02
+     e94:	cf 93       	push	r28
+     e96:	df 93       	push	r29
+     e98:	00 d0       	rcall	.+0      	; 0xe9a <run+0x6>
+     e9a:	cd b7       	in	r28, 0x3d	; 61
+     e9c:	de b7       	in	r29, 0x3e	; 62
+     e9e:	89 83       	std	Y+1, r24	; 0x01
+     ea0:	6a 83       	std	Y+2, r22	; 0x02
 	if(tickstate) //When another systick is passed, do not execute the task and set the overflow flag
-     d0a:	8a 81       	ldd	r24, Y+2	; 0x02
-     d0c:	88 23       	and	r24, r24
-     d0e:	49 f0       	breq	.+18     	; 0xd22 <run+0x26>
+     ea2:	8a 81       	ldd	r24, Y+2	; 0x02
+     ea4:	88 23       	and	r24, r24
+     ea6:	49 f0       	breq	.+18     	; 0xeba <run+0x26>
 	{
 		os->loop_ovf = task;
-     d10:	80 91 34 03 	lds	r24, 0x0334
-     d14:	90 91 35 03 	lds	r25, 0x0335
-     d18:	29 81       	ldd	r18, Y+1	; 0x01
-     d1a:	fc 01       	movw	r30, r24
-     d1c:	26 8f       	std	Z+30, r18	; 0x1e
+     ea8:	80 91 3c 03 	lds	r24, 0x033C
+     eac:	90 91 3d 03 	lds	r25, 0x033D
+     eb0:	29 81       	ldd	r18, Y+1	; 0x01
+     eb2:	fc 01       	movw	r30, r24
+     eb4:	26 8f       	std	Z+30, r18	; 0x1e
 		return 0;
-     d1e:	80 e0       	ldi	r24, 0x00	; 0
-     d20:	0c c0       	rjmp	.+24     	; 0xd3a <run+0x3e>
+     eb6:	80 e0       	ldi	r24, 0x00	; 0
+     eb8:	0c c0       	rjmp	.+24     	; 0xed2 <run+0x3e>
 	}
 	else
 		return os->flag[task]; //Return the state of the task flag
-     d22:	20 91 34 03 	lds	r18, 0x0334
-     d26:	30 91 35 03 	lds	r19, 0x0335
-     d2a:	89 81       	ldd	r24, Y+1	; 0x01
-     d2c:	88 2f       	mov	r24, r24
-     d2e:	90 e0       	ldi	r25, 0x00	; 0
-     d30:	82 0f       	add	r24, r18
-     d32:	93 1f       	adc	r25, r19
-     d34:	05 96       	adiw	r24, 0x05	; 5
-     d36:	fc 01       	movw	r30, r24
-     d38:	80 81       	ld	r24, Z
+     eba:	20 91 3c 03 	lds	r18, 0x033C
+     ebe:	30 91 3d 03 	lds	r19, 0x033D
+     ec2:	89 81       	ldd	r24, Y+1	; 0x01
+     ec4:	88 2f       	mov	r24, r24
+     ec6:	90 e0       	ldi	r25, 0x00	; 0
+     ec8:	82 0f       	add	r24, r18
+     eca:	93 1f       	adc	r25, r19
+     ecc:	05 96       	adiw	r24, 0x05	; 5
+     ece:	fc 01       	movw	r30, r24
+     ed0:	80 81       	ld	r24, Z
 };
-     d3a:	0f 90       	pop	r0
-     d3c:	0f 90       	pop	r0
-     d3e:	df 91       	pop	r29
-     d40:	cf 91       	pop	r28
-     d42:	08 95       	ret
+     ed2:	0f 90       	pop	r0
+     ed4:	0f 90       	pop	r0
+     ed6:	df 91       	pop	r29
+     ed8:	cf 91       	pop	r28
+     eda:	08 95       	ret
 
-00000d44 <time_init>:
+00000edc <init_time>:
 
 /*
  * init time
  */
-void time_init(void)
+void init_time(void)
 {
-     d44:	cf 93       	push	r28
-     d46:	df 93       	push	r29
-     d48:	cd b7       	in	r28, 0x3d	; 61
-     d4a:	de b7       	in	r29, 0x3e	; 62
+     edc:	cf 93       	push	r28
+     ede:	df 93       	push	r29
+     ee0:	cd b7       	in	r28, 0x3d	; 61
+     ee2:	de b7       	in	r29, 0x3e	; 62
 	//register memory
 	systime = ipc_memory_register(sizeof(time_t),did_TIME);
-     d4c:	63 e0       	ldi	r22, 0x03	; 3
-     d4e:	83 e0       	ldi	r24, 0x03	; 3
-     d50:	90 e0       	ldi	r25, 0x00	; 0
-     d52:	0e 94 86 03 	call	0x70c	; 0x70c <ipc_memory_register>
-     d56:	90 93 37 03 	sts	0x0337, r25
-     d5a:	80 93 36 03 	sts	0x0336, r24
+     ee4:	63 e0       	ldi	r22, 0x03	; 3
+     ee6:	83 e0       	ldi	r24, 0x03	; 3
+     ee8:	90 e0       	ldi	r25, 0x00	; 0
+     eea:	0e 94 86 03 	call	0x70c	; 0x70c <ipc_memory_register>
+     eee:	90 93 3f 03 	sts	0x033F, r25
+     ef2:	80 93 3e 03 	sts	0x033E, r24
 };
-     d5e:	00 00       	nop
-     d60:	df 91       	pop	r29
-     d62:	cf 91       	pop	r28
-     d64:	08 95       	ret
+     ef6:	00 00       	nop
+     ef8:	df 91       	pop	r29
+     efa:	cf 91       	pop	r28
+     efc:	08 95       	ret
 
-00000d66 <time_count>:
+00000efe <time_count>:
 /*
  * Count the time, has to be called every second.
  * Returns 1 when over or overflow occurred
  */
 unsigned char time_count(unsigned char direction)
 {
-     d66:	cf 93       	push	r28
-     d68:	df 93       	push	r29
-     d6a:	1f 92       	push	r1
-     d6c:	cd b7       	in	r28, 0x3d	; 61
-     d6e:	de b7       	in	r29, 0x3e	; 62
-     d70:	89 83       	std	Y+1, r24	; 0x01
+     efe:	cf 93       	push	r28
+     f00:	df 93       	push	r29
+     f02:	1f 92       	push	r1
+     f04:	cd b7       	in	r28, 0x3d	; 61
+     f06:	de b7       	in	r29, 0x3e	; 62
+     f08:	89 83       	std	Y+1, r24	; 0x01
 	if(direction == UP)
-     d72:	89 81       	ldd	r24, Y+1	; 0x01
-     d74:	88 23       	and	r24, r24
-     d76:	09 f0       	breq	.+2      	; 0xd7a <time_count+0x14>
-     d78:	5f c0       	rjmp	.+190    	; 0xe38 <time_count+0xd2>
+     f0a:	89 81       	ldd	r24, Y+1	; 0x01
+     f0c:	88 23       	and	r24, r24
+     f0e:	09 f0       	breq	.+2      	; 0xf12 <time_count+0x14>
+     f10:	5f c0       	rjmp	.+190    	; 0xfd0 <time_count+0xd2>
 	{
 		//Count seconds
 		if(systime->second < 59)
-     d7a:	80 91 36 03 	lds	r24, 0x0336
-     d7e:	90 91 37 03 	lds	r25, 0x0337
-     d82:	fc 01       	movw	r30, r24
-     d84:	82 81       	ldd	r24, Z+2	; 0x02
-     d86:	8b 33       	cpi	r24, 0x3B	; 59
-     d88:	58 f4       	brcc	.+22     	; 0xda0 <time_count+0x3a>
+     f12:	80 91 3e 03 	lds	r24, 0x033E
+     f16:	90 91 3f 03 	lds	r25, 0x033F
+     f1a:	fc 01       	movw	r30, r24
+     f1c:	82 81       	ldd	r24, Z+2	; 0x02
+     f1e:	8b 33       	cpi	r24, 0x3B	; 59
+     f20:	58 f4       	brcc	.+22     	; 0xf38 <time_count+0x3a>
 		{
 			systime->second++;
-     d8a:	80 91 36 03 	lds	r24, 0x0336
-     d8e:	90 91 37 03 	lds	r25, 0x0337
-     d92:	fc 01       	movw	r30, r24
-     d94:	22 81       	ldd	r18, Z+2	; 0x02
-     d96:	2f 5f       	subi	r18, 0xFF	; 255
-     d98:	fc 01       	movw	r30, r24
-     d9a:	22 83       	std	Z+2, r18	; 0x02
+     f22:	80 91 3e 03 	lds	r24, 0x033E
+     f26:	90 91 3f 03 	lds	r25, 0x033F
+     f2a:	fc 01       	movw	r30, r24
+     f2c:	22 81       	ldd	r18, Z+2	; 0x02
+     f2e:	2f 5f       	subi	r18, 0xFF	; 255
+     f30:	fc 01       	movw	r30, r24
+     f32:	22 83       	std	Z+2, r18	; 0x02
 			return 0;
-     d9c:	80 e0       	ldi	r24, 0x00	; 0
-     d9e:	b3 c0       	rjmp	.+358    	; 0xf06 <time_count+0x1a0>
+     f34:	80 e0       	ldi	r24, 0x00	; 0
+     f36:	b3 c0       	rjmp	.+358    	; 0x109e <time_count+0x1a0>
 		}
 		//Count minutes
 		else if(systime->minute < 59)
-     da0:	80 91 36 03 	lds	r24, 0x0336
-     da4:	90 91 37 03 	lds	r25, 0x0337
-     da8:	fc 01       	movw	r30, r24
-     daa:	81 81       	ldd	r24, Z+1	; 0x01
-     dac:	8b 33       	cpi	r24, 0x3B	; 59
-     dae:	88 f4       	brcc	.+34     	; 0xdd2 <time_count+0x6c>
+     f38:	80 91 3e 03 	lds	r24, 0x033E
+     f3c:	90 91 3f 03 	lds	r25, 0x033F
+     f40:	fc 01       	movw	r30, r24
+     f42:	81 81       	ldd	r24, Z+1	; 0x01
+     f44:	8b 33       	cpi	r24, 0x3B	; 59
+     f46:	88 f4       	brcc	.+34     	; 0xf6a <time_count+0x6c>
 		{
 			systime->second = 0;
-     db0:	80 91 36 03 	lds	r24, 0x0336
-     db4:	90 91 37 03 	lds	r25, 0x0337
-     db8:	fc 01       	movw	r30, r24
-     dba:	12 82       	std	Z+2, r1	; 0x02
+     f48:	80 91 3e 03 	lds	r24, 0x033E
+     f4c:	90 91 3f 03 	lds	r25, 0x033F
+     f50:	fc 01       	movw	r30, r24
+     f52:	12 82       	std	Z+2, r1	; 0x02
 			systime->minute++;
-     dbc:	80 91 36 03 	lds	r24, 0x0336
-     dc0:	90 91 37 03 	lds	r25, 0x0337
-     dc4:	fc 01       	movw	r30, r24
-     dc6:	21 81       	ldd	r18, Z+1	; 0x01
-     dc8:	2f 5f       	subi	r18, 0xFF	; 255
-     dca:	fc 01       	movw	r30, r24
-     dcc:	21 83       	std	Z+1, r18	; 0x01
+     f54:	80 91 3e 03 	lds	r24, 0x033E
+     f58:	90 91 3f 03 	lds	r25, 0x033F
+     f5c:	fc 01       	movw	r30, r24
+     f5e:	21 81       	ldd	r18, Z+1	; 0x01
+     f60:	2f 5f       	subi	r18, 0xFF	; 255
+     f62:	fc 01       	movw	r30, r24
+     f64:	21 83       	std	Z+1, r18	; 0x01
 			return 0;
-     dce:	80 e0       	ldi	r24, 0x00	; 0
-     dd0:	9a c0       	rjmp	.+308    	; 0xf06 <time_count+0x1a0>
+     f66:	80 e0       	ldi	r24, 0x00	; 0
+     f68:	9a c0       	rjmp	.+308    	; 0x109e <time_count+0x1a0>
 		}
 		//Count hours
 		else if(systime->hour < 1)
-     dd2:	80 91 36 03 	lds	r24, 0x0336
-     dd6:	90 91 37 03 	lds	r25, 0x0337
-     dda:	fc 01       	movw	r30, r24
-     ddc:	80 81       	ld	r24, Z
-     dde:	88 23       	and	r24, r24
-     de0:	b9 f4       	brne	.+46     	; 0xe10 <time_count+0xaa>
+     f6a:	80 91 3e 03 	lds	r24, 0x033E
+     f6e:	90 91 3f 03 	lds	r25, 0x033F
+     f72:	fc 01       	movw	r30, r24
+     f74:	80 81       	ld	r24, Z
+     f76:	88 23       	and	r24, r24
+     f78:	b9 f4       	brne	.+46     	; 0xfa8 <time_count+0xaa>
 		{
 			systime->second = 0;
-     de2:	80 91 36 03 	lds	r24, 0x0336
-     de6:	90 91 37 03 	lds	r25, 0x0337
-     dea:	fc 01       	movw	r30, r24
-     dec:	12 82       	std	Z+2, r1	; 0x02
+     f7a:	80 91 3e 03 	lds	r24, 0x033E
+     f7e:	90 91 3f 03 	lds	r25, 0x033F
+     f82:	fc 01       	movw	r30, r24
+     f84:	12 82       	std	Z+2, r1	; 0x02
 			systime->minute = 0;
-     dee:	80 91 36 03 	lds	r24, 0x0336
-     df2:	90 91 37 03 	lds	r25, 0x0337
-     df6:	fc 01       	movw	r30, r24
-     df8:	11 82       	std	Z+1, r1	; 0x01
+     f86:	80 91 3e 03 	lds	r24, 0x033E
+     f8a:	90 91 3f 03 	lds	r25, 0x033F
+     f8e:	fc 01       	movw	r30, r24
+     f90:	11 82       	std	Z+1, r1	; 0x01
 			systime->hour++;
-     dfa:	80 91 36 03 	lds	r24, 0x0336
-     dfe:	90 91 37 03 	lds	r25, 0x0337
-     e02:	fc 01       	movw	r30, r24
-     e04:	20 81       	ld	r18, Z
-     e06:	2f 5f       	subi	r18, 0xFF	; 255
-     e08:	fc 01       	movw	r30, r24
-     e0a:	20 83       	st	Z, r18
+     f92:	80 91 3e 03 	lds	r24, 0x033E
+     f96:	90 91 3f 03 	lds	r25, 0x033F
+     f9a:	fc 01       	movw	r30, r24
+     f9c:	20 81       	ld	r18, Z
+     f9e:	2f 5f       	subi	r18, 0xFF	; 255
+     fa0:	fc 01       	movw	r30, r24
+     fa2:	20 83       	st	Z, r18
 			return 0;
-     e0c:	80 e0       	ldi	r24, 0x00	; 0
-     e0e:	7b c0       	rjmp	.+246    	; 0xf06 <time_count+0x1a0>
+     fa4:	80 e0       	ldi	r24, 0x00	; 0
+     fa6:	7b c0       	rjmp	.+246    	; 0x109e <time_count+0x1a0>
 		}
 		//Reset count on overflow
 		else
 		{
 			systime->second = 0;
-     e10:	80 91 36 03 	lds	r24, 0x0336
-     e14:	90 91 37 03 	lds	r25, 0x0337
-     e18:	fc 01       	movw	r30, r24
-     e1a:	12 82       	std	Z+2, r1	; 0x02
+     fa8:	80 91 3e 03 	lds	r24, 0x033E
+     fac:	90 91 3f 03 	lds	r25, 0x033F
+     fb0:	fc 01       	movw	r30, r24
+     fb2:	12 82       	std	Z+2, r1	; 0x02
 			systime->minute = 0;
-     e1c:	80 91 36 03 	lds	r24, 0x0336
-     e20:	90 91 37 03 	lds	r25, 0x0337
-     e24:	fc 01       	movw	r30, r24
-     e26:	11 82       	std	Z+1, r1	; 0x01
+     fb4:	80 91 3e 03 	lds	r24, 0x033E
+     fb8:	90 91 3f 03 	lds	r25, 0x033F
+     fbc:	fc 01       	movw	r30, r24
+     fbe:	11 82       	std	Z+1, r1	; 0x01
 			systime->hour   = 0;
-     e28:	80 91 36 03 	lds	r24, 0x0336
-     e2c:	90 91 37 03 	lds	r25, 0x0337
-     e30:	fc 01       	movw	r30, r24
-     e32:	10 82       	st	Z, r1
+     fc0:	80 91 3e 03 	lds	r24, 0x033E
+     fc4:	90 91 3f 03 	lds	r25, 0x033F
+     fc8:	fc 01       	movw	r30, r24
+     fca:	10 82       	st	Z, r1
 			return 1;
-     e34:	81 e0       	ldi	r24, 0x01	; 1
-     e36:	67 c0       	rjmp	.+206    	; 0xf06 <time_count+0x1a0>
+     fcc:	81 e0       	ldi	r24, 0x01	; 1
+     fce:	67 c0       	rjmp	.+206    	; 0x109e <time_count+0x1a0>
 		}
 	}
 	else if(direction == DOWN)
-     e38:	89 81       	ldd	r24, Y+1	; 0x01
-     e3a:	81 30       	cpi	r24, 0x01	; 1
-     e3c:	09 f0       	breq	.+2      	; 0xe40 <time_count+0xda>
-     e3e:	62 c0       	rjmp	.+196    	; 0xf04 <time_count+0x19e>
+     fd0:	89 81       	ldd	r24, Y+1	; 0x01
+     fd2:	81 30       	cpi	r24, 0x01	; 1
+     fd4:	09 f0       	breq	.+2      	; 0xfd8 <time_count+0xda>
+     fd6:	62 c0       	rjmp	.+196    	; 0x109c <time_count+0x19e>
 	{
 		//Count seconds
 		if(systime->second > 0)
-     e40:	80 91 36 03 	lds	r24, 0x0336
-     e44:	90 91 37 03 	lds	r25, 0x0337
-     e48:	fc 01       	movw	r30, r24
-     e4a:	82 81       	ldd	r24, Z+2	; 0x02
-     e4c:	88 23       	and	r24, r24
-     e4e:	59 f0       	breq	.+22     	; 0xe66 <time_count+0x100>
+     fd8:	80 91 3e 03 	lds	r24, 0x033E
+     fdc:	90 91 3f 03 	lds	r25, 0x033F
+     fe0:	fc 01       	movw	r30, r24
+     fe2:	82 81       	ldd	r24, Z+2	; 0x02
+     fe4:	88 23       	and	r24, r24
+     fe6:	59 f0       	breq	.+22     	; 0xffe <time_count+0x100>
 		{
 			systime->second--;
-     e50:	80 91 36 03 	lds	r24, 0x0336
-     e54:	90 91 37 03 	lds	r25, 0x0337
-     e58:	fc 01       	movw	r30, r24
-     e5a:	22 81       	ldd	r18, Z+2	; 0x02
-     e5c:	21 50       	subi	r18, 0x01	; 1
-     e5e:	fc 01       	movw	r30, r24
-     e60:	22 83       	std	Z+2, r18	; 0x02
+     fe8:	80 91 3e 03 	lds	r24, 0x033E
+     fec:	90 91 3f 03 	lds	r25, 0x033F
+     ff0:	fc 01       	movw	r30, r24
+     ff2:	22 81       	ldd	r18, Z+2	; 0x02
+     ff4:	21 50       	subi	r18, 0x01	; 1
+     ff6:	fc 01       	movw	r30, r24
+     ff8:	22 83       	std	Z+2, r18	; 0x02
 			return 0;
-     e62:	80 e0       	ldi	r24, 0x00	; 0
-     e64:	50 c0       	rjmp	.+160    	; 0xf06 <time_count+0x1a0>
+     ffa:	80 e0       	ldi	r24, 0x00	; 0
+     ffc:	50 c0       	rjmp	.+160    	; 0x109e <time_count+0x1a0>
 		}
 		//Count minutes
 		else if(systime->minute > 0)
-     e66:	80 91 36 03 	lds	r24, 0x0336
-     e6a:	90 91 37 03 	lds	r25, 0x0337
-     e6e:	fc 01       	movw	r30, r24
-     e70:	81 81       	ldd	r24, Z+1	; 0x01
-     e72:	88 23       	and	r24, r24
-     e74:	91 f0       	breq	.+36     	; 0xe9a <time_count+0x134>
+     ffe:	80 91 3e 03 	lds	r24, 0x033E
+    1002:	90 91 3f 03 	lds	r25, 0x033F
+    1006:	fc 01       	movw	r30, r24
+    1008:	81 81       	ldd	r24, Z+1	; 0x01
+    100a:	88 23       	and	r24, r24
+    100c:	91 f0       	breq	.+36     	; 0x1032 <time_count+0x134>
 		{
 			systime->second = 60;
-     e76:	80 91 36 03 	lds	r24, 0x0336
-     e7a:	90 91 37 03 	lds	r25, 0x0337
-     e7e:	2c e3       	ldi	r18, 0x3C	; 60
-     e80:	fc 01       	movw	r30, r24
-     e82:	22 83       	std	Z+2, r18	; 0x02
+    100e:	80 91 3e 03 	lds	r24, 0x033E
+    1012:	90 91 3f 03 	lds	r25, 0x033F
+    1016:	2c e3       	ldi	r18, 0x3C	; 60
+    1018:	fc 01       	movw	r30, r24
+    101a:	22 83       	std	Z+2, r18	; 0x02
 			systime->minute--;
-     e84:	80 91 36 03 	lds	r24, 0x0336
-     e88:	90 91 37 03 	lds	r25, 0x0337
-     e8c:	fc 01       	movw	r30, r24
-     e8e:	21 81       	ldd	r18, Z+1	; 0x01
-     e90:	21 50       	subi	r18, 0x01	; 1
-     e92:	fc 01       	movw	r30, r24
-     e94:	21 83       	std	Z+1, r18	; 0x01
+    101c:	80 91 3e 03 	lds	r24, 0x033E
+    1020:	90 91 3f 03 	lds	r25, 0x033F
+    1024:	fc 01       	movw	r30, r24
+    1026:	21 81       	ldd	r18, Z+1	; 0x01
+    1028:	21 50       	subi	r18, 0x01	; 1
+    102a:	fc 01       	movw	r30, r24
+    102c:	21 83       	std	Z+1, r18	; 0x01
 			return 0;
-     e96:	80 e0       	ldi	r24, 0x00	; 0
-     e98:	36 c0       	rjmp	.+108    	; 0xf06 <time_count+0x1a0>
+    102e:	80 e0       	ldi	r24, 0x00	; 0
+    1030:	36 c0       	rjmp	.+108    	; 0x109e <time_count+0x1a0>
 		}
 		//Count hours
 		else if(systime->hour > 0)
-     e9a:	80 91 36 03 	lds	r24, 0x0336
-     e9e:	90 91 37 03 	lds	r25, 0x0337
-     ea2:	fc 01       	movw	r30, r24
-     ea4:	80 81       	ld	r24, Z
-     ea6:	88 23       	and	r24, r24
-     ea8:	c9 f0       	breq	.+50     	; 0xedc <time_count+0x176>
+    1032:	80 91 3e 03 	lds	r24, 0x033E
+    1036:	90 91 3f 03 	lds	r25, 0x033F
+    103a:	fc 01       	movw	r30, r24
+    103c:	80 81       	ld	r24, Z
+    103e:	88 23       	and	r24, r24
+    1040:	c9 f0       	breq	.+50     	; 0x1074 <time_count+0x176>
 		{
 			systime->second = 60;
-     eaa:	80 91 36 03 	lds	r24, 0x0336
-     eae:	90 91 37 03 	lds	r25, 0x0337
-     eb2:	2c e3       	ldi	r18, 0x3C	; 60
-     eb4:	fc 01       	movw	r30, r24
-     eb6:	22 83       	std	Z+2, r18	; 0x02
+    1042:	80 91 3e 03 	lds	r24, 0x033E
+    1046:	90 91 3f 03 	lds	r25, 0x033F
+    104a:	2c e3       	ldi	r18, 0x3C	; 60
+    104c:	fc 01       	movw	r30, r24
+    104e:	22 83       	std	Z+2, r18	; 0x02
 			systime->minute = 60;
-     eb8:	80 91 36 03 	lds	r24, 0x0336
-     ebc:	90 91 37 03 	lds	r25, 0x0337
-     ec0:	2c e3       	ldi	r18, 0x3C	; 60
-     ec2:	fc 01       	movw	r30, r24
-     ec4:	21 83       	std	Z+1, r18	; 0x01
+    1050:	80 91 3e 03 	lds	r24, 0x033E
+    1054:	90 91 3f 03 	lds	r25, 0x033F
+    1058:	2c e3       	ldi	r18, 0x3C	; 60
+    105a:	fc 01       	movw	r30, r24
+    105c:	21 83       	std	Z+1, r18	; 0x01
 			systime->hour--;
-     ec6:	80 91 36 03 	lds	r24, 0x0336
-     eca:	90 91 37 03 	lds	r25, 0x0337
-     ece:	fc 01       	movw	r30, r24
-     ed0:	20 81       	ld	r18, Z
-     ed2:	21 50       	subi	r18, 0x01	; 1
-     ed4:	fc 01       	movw	r30, r24
-     ed6:	20 83       	st	Z, r18
+    105e:	80 91 3e 03 	lds	r24, 0x033E
+    1062:	90 91 3f 03 	lds	r25, 0x033F
+    1066:	fc 01       	movw	r30, r24
+    1068:	20 81       	ld	r18, Z
+    106a:	21 50       	subi	r18, 0x01	; 1
+    106c:	fc 01       	movw	r30, r24
+    106e:	20 83       	st	Z, r18
 			return 0;
-     ed8:	80 e0       	ldi	r24, 0x00	; 0
-     eda:	15 c0       	rjmp	.+42     	; 0xf06 <time_count+0x1a0>
+    1070:	80 e0       	ldi	r24, 0x00	; 0
+    1072:	15 c0       	rjmp	.+42     	; 0x109e <time_count+0x1a0>
 		}
 		//Reset count on overflow
 		else
 		{
 			systime->second = 0;
-     edc:	80 91 36 03 	lds	r24, 0x0336
-     ee0:	90 91 37 03 	lds	r25, 0x0337
-     ee4:	fc 01       	movw	r30, r24
-     ee6:	12 82       	std	Z+2, r1	; 0x02
+    1074:	80 91 3e 03 	lds	r24, 0x033E
+    1078:	90 91 3f 03 	lds	r25, 0x033F
+    107c:	fc 01       	movw	r30, r24
+    107e:	12 82       	std	Z+2, r1	; 0x02
 			systime->minute = 0;
-     ee8:	80 91 36 03 	lds	r24, 0x0336
-     eec:	90 91 37 03 	lds	r25, 0x0337
-     ef0:	fc 01       	movw	r30, r24
-     ef2:	11 82       	std	Z+1, r1	; 0x01
+    1080:	80 91 3e 03 	lds	r24, 0x033E
+    1084:	90 91 3f 03 	lds	r25, 0x033F
+    1088:	fc 01       	movw	r30, r24
+    108a:	11 82       	std	Z+1, r1	; 0x01
 			systime->hour   = 0;
-     ef4:	80 91 36 03 	lds	r24, 0x0336
-     ef8:	90 91 37 03 	lds	r25, 0x0337
-     efc:	fc 01       	movw	r30, r24
-     efe:	10 82       	st	Z, r1
+    108c:	80 91 3e 03 	lds	r24, 0x033E
+    1090:	90 91 3f 03 	lds	r25, 0x033F
+    1094:	fc 01       	movw	r30, r24
+    1096:	10 82       	st	Z, r1
 			return 1;
-     f00:	81 e0       	ldi	r24, 0x01	; 1
-     f02:	01 c0       	rjmp	.+2      	; 0xf06 <time_count+0x1a0>
+    1098:	81 e0       	ldi	r24, 0x01	; 1
+    109a:	01 c0       	rjmp	.+2      	; 0x109e <time_count+0x1a0>
 		}
 	}
 	else
 		return 1;
-     f04:	81 e0       	ldi	r24, 0x01	; 1
+    109c:	81 e0       	ldi	r24, 0x01	; 1
 };
-     f06:	0f 90       	pop	r0
-     f08:	df 91       	pop	r29
-     f0a:	cf 91       	pop	r28
-     f0c:	08 95       	ret
+    109e:	0f 90       	pop	r0
+    10a0:	df 91       	pop	r29
+    10a2:	cf 91       	pop	r28
+    10a4:	08 95       	ret
 
-00000f0e <get_digit_time>:
+000010a6 <get_digit_time>:
 
 /*
  * get the digits to display of the current time
  */
 unsigned char get_digit_time(unsigned char digitnumber)
 {
-     f0e:	cf 93       	push	r28
-     f10:	df 93       	push	r29
-     f12:	1f 92       	push	r1
-     f14:	cd b7       	in	r28, 0x3d	; 61
-     f16:	de b7       	in	r29, 0x3e	; 62
-     f18:	89 83       	std	Y+1, r24	; 0x01
+    10a6:	cf 93       	push	r28
+    10a8:	df 93       	push	r29
+    10aa:	1f 92       	push	r1
+    10ac:	cd b7       	in	r28, 0x3d	; 61
+    10ae:	de b7       	in	r29, 0x3e	; 62
+    10b0:	89 83       	std	Y+1, r24	; 0x01
 	switch(digitnumber)
-     f1a:	89 81       	ldd	r24, Y+1	; 0x01
-     f1c:	88 2f       	mov	r24, r24
-     f1e:	90 e0       	ldi	r25, 0x00	; 0
-     f20:	83 30       	cpi	r24, 0x03	; 3
-     f22:	91 05       	cpc	r25, r1
-     f24:	21 f1       	breq	.+72     	; 0xf6e <get_digit_time+0x60>
-     f26:	84 30       	cpi	r24, 0x04	; 4
-     f28:	91 05       	cpc	r25, r1
-     f2a:	34 f4       	brge	.+12     	; 0xf38 <get_digit_time+0x2a>
-     f2c:	81 30       	cpi	r24, 0x01	; 1
-     f2e:	91 05       	cpc	r25, r1
-     f30:	49 f0       	breq	.+18     	; 0xf44 <get_digit_time+0x36>
-     f32:	02 97       	sbiw	r24, 0x02	; 2
-     f34:	71 f0       	breq	.+28     	; 0xf52 <get_digit_time+0x44>
-     f36:	55 c0       	rjmp	.+170    	; 0xfe2 <get_digit_time+0xd4>
-     f38:	84 30       	cpi	r24, 0x04	; 4
-     f3a:	91 05       	cpc	r25, r1
-     f3c:	71 f1       	breq	.+92     	; 0xf9a <get_digit_time+0x8c>
-     f3e:	05 97       	sbiw	r24, 0x05	; 5
-     f40:	d1 f1       	breq	.+116    	; 0xfb6 <get_digit_time+0xa8>
-     f42:	4f c0       	rjmp	.+158    	; 0xfe2 <get_digit_time+0xd4>
+    10b2:	89 81       	ldd	r24, Y+1	; 0x01
+    10b4:	88 2f       	mov	r24, r24
+    10b6:	90 e0       	ldi	r25, 0x00	; 0
+    10b8:	83 30       	cpi	r24, 0x03	; 3
+    10ba:	91 05       	cpc	r25, r1
+    10bc:	21 f1       	breq	.+72     	; 0x1106 <get_digit_time+0x60>
+    10be:	84 30       	cpi	r24, 0x04	; 4
+    10c0:	91 05       	cpc	r25, r1
+    10c2:	34 f4       	brge	.+12     	; 0x10d0 <get_digit_time+0x2a>
+    10c4:	81 30       	cpi	r24, 0x01	; 1
+    10c6:	91 05       	cpc	r25, r1
+    10c8:	49 f0       	breq	.+18     	; 0x10dc <get_digit_time+0x36>
+    10ca:	02 97       	sbiw	r24, 0x02	; 2
+    10cc:	71 f0       	breq	.+28     	; 0x10ea <get_digit_time+0x44>
+    10ce:	55 c0       	rjmp	.+170    	; 0x117a <get_digit_time+0xd4>
+    10d0:	84 30       	cpi	r24, 0x04	; 4
+    10d2:	91 05       	cpc	r25, r1
+    10d4:	71 f1       	breq	.+92     	; 0x1132 <get_digit_time+0x8c>
+    10d6:	05 97       	sbiw	r24, 0x05	; 5
+    10d8:	d1 f1       	breq	.+116    	; 0x114e <get_digit_time+0xa8>
+    10da:	4f c0       	rjmp	.+158    	; 0x117a <get_digit_time+0xd4>
 	{
 	case 1:
 		return systime->hour;
-     f44:	80 91 36 03 	lds	r24, 0x0336
-     f48:	90 91 37 03 	lds	r25, 0x0337
-     f4c:	fc 01       	movw	r30, r24
-     f4e:	80 81       	ld	r24, Z
-     f50:	49 c0       	rjmp	.+146    	; 0xfe4 <get_digit_time+0xd6>
+    10dc:	80 91 3e 03 	lds	r24, 0x033E
+    10e0:	90 91 3f 03 	lds	r25, 0x033F
+    10e4:	fc 01       	movw	r30, r24
+    10e6:	80 81       	ld	r24, Z
+    10e8:	49 c0       	rjmp	.+146    	; 0x117c <get_digit_time+0xd6>
 		break;
 	case 2:
 		return (unsigned char)(systime->minute/10);
-     f52:	80 91 36 03 	lds	r24, 0x0336
-     f56:	90 91 37 03 	lds	r25, 0x0337
-     f5a:	fc 01       	movw	r30, r24
-     f5c:	91 81       	ldd	r25, Z+1	; 0x01
-     f5e:	8d ec       	ldi	r24, 0xCD	; 205
-     f60:	98 9f       	mul	r25, r24
-     f62:	81 2d       	mov	r24, r1
-     f64:	11 24       	eor	r1, r1
-     f66:	86 95       	lsr	r24
-     f68:	86 95       	lsr	r24
-     f6a:	86 95       	lsr	r24
-     f6c:	3b c0       	rjmp	.+118    	; 0xfe4 <get_digit_time+0xd6>
+    10ea:	80 91 3e 03 	lds	r24, 0x033E
+    10ee:	90 91 3f 03 	lds	r25, 0x033F
+    10f2:	fc 01       	movw	r30, r24
+    10f4:	91 81       	ldd	r25, Z+1	; 0x01
+    10f6:	8d ec       	ldi	r24, 0xCD	; 205
+    10f8:	98 9f       	mul	r25, r24
+    10fa:	81 2d       	mov	r24, r1
+    10fc:	11 24       	eor	r1, r1
+    10fe:	86 95       	lsr	r24
+    1100:	86 95       	lsr	r24
+    1102:	86 95       	lsr	r24
+    1104:	3b c0       	rjmp	.+118    	; 0x117c <get_digit_time+0xd6>
 		break;
 	case 3:
 		return systime->minute%10;
-     f6e:	80 91 36 03 	lds	r24, 0x0336
-     f72:	90 91 37 03 	lds	r25, 0x0337
-     f76:	fc 01       	movw	r30, r24
-     f78:	91 81       	ldd	r25, Z+1	; 0x01
-     f7a:	8d ec       	ldi	r24, 0xCD	; 205
-     f7c:	98 9f       	mul	r25, r24
-     f7e:	81 2d       	mov	r24, r1
-     f80:	11 24       	eor	r1, r1
-     f82:	86 95       	lsr	r24
-     f84:	86 95       	lsr	r24
-     f86:	86 95       	lsr	r24
-     f88:	88 0f       	add	r24, r24
-     f8a:	28 2f       	mov	r18, r24
-     f8c:	22 0f       	add	r18, r18
-     f8e:	22 0f       	add	r18, r18
-     f90:	82 0f       	add	r24, r18
-     f92:	f9 2f       	mov	r31, r25
-     f94:	f8 1b       	sub	r31, r24
-     f96:	8f 2f       	mov	r24, r31
-     f98:	25 c0       	rjmp	.+74     	; 0xfe4 <get_digit_time+0xd6>
+    1106:	80 91 3e 03 	lds	r24, 0x033E
+    110a:	90 91 3f 03 	lds	r25, 0x033F
+    110e:	fc 01       	movw	r30, r24
+    1110:	91 81       	ldd	r25, Z+1	; 0x01
+    1112:	8d ec       	ldi	r24, 0xCD	; 205
+    1114:	98 9f       	mul	r25, r24
+    1116:	81 2d       	mov	r24, r1
+    1118:	11 24       	eor	r1, r1
+    111a:	86 95       	lsr	r24
+    111c:	86 95       	lsr	r24
+    111e:	86 95       	lsr	r24
+    1120:	88 0f       	add	r24, r24
+    1122:	28 2f       	mov	r18, r24
+    1124:	22 0f       	add	r18, r18
+    1126:	22 0f       	add	r18, r18
+    1128:	82 0f       	add	r24, r18
+    112a:	f9 2f       	mov	r31, r25
+    112c:	f8 1b       	sub	r31, r24
+    112e:	8f 2f       	mov	r24, r31
+    1130:	25 c0       	rjmp	.+74     	; 0x117c <get_digit_time+0xd6>
 		break;
 	case 4:
 		return systime->second/10;
-     f9a:	80 91 36 03 	lds	r24, 0x0336
-     f9e:	90 91 37 03 	lds	r25, 0x0337
-     fa2:	fc 01       	movw	r30, r24
-     fa4:	92 81       	ldd	r25, Z+2	; 0x02
-     fa6:	8d ec       	ldi	r24, 0xCD	; 205
-     fa8:	98 9f       	mul	r25, r24
-     faa:	81 2d       	mov	r24, r1
-     fac:	11 24       	eor	r1, r1
-     fae:	86 95       	lsr	r24
-     fb0:	86 95       	lsr	r24
-     fb2:	86 95       	lsr	r24
-     fb4:	17 c0       	rjmp	.+46     	; 0xfe4 <get_digit_time+0xd6>
+    1132:	80 91 3e 03 	lds	r24, 0x033E
+    1136:	90 91 3f 03 	lds	r25, 0x033F
+    113a:	fc 01       	movw	r30, r24
+    113c:	92 81       	ldd	r25, Z+2	; 0x02
+    113e:	8d ec       	ldi	r24, 0xCD	; 205
+    1140:	98 9f       	mul	r25, r24
+    1142:	81 2d       	mov	r24, r1
+    1144:	11 24       	eor	r1, r1
+    1146:	86 95       	lsr	r24
+    1148:	86 95       	lsr	r24
+    114a:	86 95       	lsr	r24
+    114c:	17 c0       	rjmp	.+46     	; 0x117c <get_digit_time+0xd6>
 		break;
 	case 5:
 		return systime->second%10;
-     fb6:	80 91 36 03 	lds	r24, 0x0336
-     fba:	90 91 37 03 	lds	r25, 0x0337
-     fbe:	fc 01       	movw	r30, r24
-     fc0:	92 81       	ldd	r25, Z+2	; 0x02
-     fc2:	8d ec       	ldi	r24, 0xCD	; 205
-     fc4:	98 9f       	mul	r25, r24
-     fc6:	81 2d       	mov	r24, r1
-     fc8:	11 24       	eor	r1, r1
-     fca:	86 95       	lsr	r24
-     fcc:	86 95       	lsr	r24
-     fce:	86 95       	lsr	r24
-     fd0:	88 0f       	add	r24, r24
-     fd2:	28 2f       	mov	r18, r24
-     fd4:	22 0f       	add	r18, r18
-     fd6:	22 0f       	add	r18, r18
-     fd8:	82 0f       	add	r24, r18
-     fda:	f9 2f       	mov	r31, r25
-     fdc:	f8 1b       	sub	r31, r24
-     fde:	8f 2f       	mov	r24, r31
-     fe0:	01 c0       	rjmp	.+2      	; 0xfe4 <get_digit_time+0xd6>
+    114e:	80 91 3e 03 	lds	r24, 0x033E
+    1152:	90 91 3f 03 	lds	r25, 0x033F
+    1156:	fc 01       	movw	r30, r24
+    1158:	92 81       	ldd	r25, Z+2	; 0x02
+    115a:	8d ec       	ldi	r24, 0xCD	; 205
+    115c:	98 9f       	mul	r25, r24
+    115e:	81 2d       	mov	r24, r1
+    1160:	11 24       	eor	r1, r1
+    1162:	86 95       	lsr	r24
+    1164:	86 95       	lsr	r24
+    1166:	86 95       	lsr	r24
+    1168:	88 0f       	add	r24, r24
+    116a:	28 2f       	mov	r18, r24
+    116c:	22 0f       	add	r18, r18
+    116e:	22 0f       	add	r18, r18
+    1170:	82 0f       	add	r24, r18
+    1172:	f9 2f       	mov	r31, r25
+    1174:	f8 1b       	sub	r31, r24
+    1176:	8f 2f       	mov	r24, r31
+    1178:	01 c0       	rjmp	.+2      	; 0x117c <get_digit_time+0xd6>
 		break;
 	default:
 		return 0;
-     fe2:	80 e0       	ldi	r24, 0x00	; 0
+    117a:	80 e0       	ldi	r24, 0x00	; 0
 		break;
 	}
 };
-     fe4:	0f 90       	pop	r0
-     fe6:	df 91       	pop	r29
-     fe8:	cf 91       	pop	r28
-     fea:	08 95       	ret
+    117c:	0f 90       	pop	r0
+    117e:	df 91       	pop	r29
+    1180:	cf 91       	pop	r28
+    1182:	08 95       	ret
 
-00000fec <get_time_int>:
+00001184 <get_time_int>:
 
 /*
  * get the current time as int to directly display the number
  */
 unsigned int get_time_int(void)
 {
-     fec:	cf 93       	push	r28
-     fee:	df 93       	push	r29
-     ff0:	cd b7       	in	r28, 0x3d	; 61
-     ff2:	de b7       	in	r29, 0x3e	; 62
+    1184:	cf 93       	push	r28
+    1186:	df 93       	push	r29
+    1188:	cd b7       	in	r28, 0x3d	; 61
+    118a:	de b7       	in	r29, 0x3e	; 62
 	return (systime->minute*100)+(systime->second);
-     ff4:	80 91 36 03 	lds	r24, 0x0336
-     ff8:	90 91 37 03 	lds	r25, 0x0337
-     ffc:	fc 01       	movw	r30, r24
-     ffe:	81 81       	ldd	r24, Z+1	; 0x01
-    1000:	88 2f       	mov	r24, r24
-    1002:	90 e0       	ldi	r25, 0x00	; 0
-    1004:	44 e6       	ldi	r20, 0x64	; 100
-    1006:	48 9f       	mul	r20, r24
-    1008:	90 01       	movw	r18, r0
-    100a:	49 9f       	mul	r20, r25
-    100c:	30 0d       	add	r19, r0
-    100e:	11 24       	eor	r1, r1
-    1010:	80 91 36 03 	lds	r24, 0x0336
-    1014:	90 91 37 03 	lds	r25, 0x0337
-    1018:	fc 01       	movw	r30, r24
-    101a:	82 81       	ldd	r24, Z+2	; 0x02
-    101c:	88 2f       	mov	r24, r24
-    101e:	90 e0       	ldi	r25, 0x00	; 0
-    1020:	82 0f       	add	r24, r18
-    1022:	93 1f       	adc	r25, r19
+    118c:	80 91 3e 03 	lds	r24, 0x033E
+    1190:	90 91 3f 03 	lds	r25, 0x033F
+    1194:	fc 01       	movw	r30, r24
+    1196:	81 81       	ldd	r24, Z+1	; 0x01
+    1198:	88 2f       	mov	r24, r24
+    119a:	90 e0       	ldi	r25, 0x00	; 0
+    119c:	44 e6       	ldi	r20, 0x64	; 100
+    119e:	48 9f       	mul	r20, r24
+    11a0:	90 01       	movw	r18, r0
+    11a2:	49 9f       	mul	r20, r25
+    11a4:	30 0d       	add	r19, r0
+    11a6:	11 24       	eor	r1, r1
+    11a8:	80 91 3e 03 	lds	r24, 0x033E
+    11ac:	90 91 3f 03 	lds	r25, 0x033F
+    11b0:	fc 01       	movw	r30, r24
+    11b2:	82 81       	ldd	r24, Z+2	; 0x02
+    11b4:	88 2f       	mov	r24, r24
+    11b6:	90 e0       	ldi	r25, 0x00	; 0
+    11b8:	82 0f       	add	r24, r18
+    11ba:	93 1f       	adc	r25, r19
 }
-    1024:	df 91       	pop	r29
-    1026:	cf 91       	pop	r28
-    1028:	08 95       	ret
+    11bc:	df 91       	pop	r29
+    11be:	cf 91       	pop	r28
+    11c0:	08 95       	ret
 
-0000102a <__umulhisi3>:
-    102a:	a2 9f       	mul	r26, r18
-    102c:	b0 01       	movw	r22, r0
-    102e:	b3 9f       	mul	r27, r19
-    1030:	c0 01       	movw	r24, r0
-    1032:	a3 9f       	mul	r26, r19
-    1034:	70 0d       	add	r23, r0
-    1036:	81 1d       	adc	r24, r1
-    1038:	11 24       	eor	r1, r1
-    103a:	91 1d       	adc	r25, r1
-    103c:	b2 9f       	mul	r27, r18
-    103e:	70 0d       	add	r23, r0
-    1040:	81 1d       	adc	r24, r1
-    1042:	11 24       	eor	r1, r1
-    1044:	91 1d       	adc	r25, r1
-    1046:	08 95       	ret
+000011c2 <__umulhisi3>:
+    11c2:	a2 9f       	mul	r26, r18
+    11c4:	b0 01       	movw	r22, r0
+    11c6:	b3 9f       	mul	r27, r19
+    11c8:	c0 01       	movw	r24, r0
+    11ca:	a3 9f       	mul	r26, r19
+    11cc:	70 0d       	add	r23, r0
+    11ce:	81 1d       	adc	r24, r1
+    11d0:	11 24       	eor	r1, r1
+    11d2:	91 1d       	adc	r25, r1
+    11d4:	b2 9f       	mul	r27, r18
+    11d6:	70 0d       	add	r23, r0
+    11d8:	81 1d       	adc	r24, r1
+    11da:	11 24       	eor	r1, r1
+    11dc:	91 1d       	adc	r25, r1
+    11de:	08 95       	ret
 
-00001048 <_exit>:
-    1048:	f8 94       	cli
+000011e0 <_exit>:
+    11e0:	f8 94       	cli
 
-0000104a <__stop_program>:
-    104a:	ff cf       	rjmp	.-2      	; 0x104a <__stop_program>
+000011e2 <__stop_program>:
+    11e2:	ff cf       	rjmp	.-2      	; 0x11e2 <__stop_program>

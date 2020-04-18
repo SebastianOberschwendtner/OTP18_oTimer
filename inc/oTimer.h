@@ -73,18 +73,31 @@
 #define 	OFF		0
 #define		ON		1
 #define		TOGGLE	3
+
 #define		UP 		0
 #define		DOWN	1
+
+//system states
+#define		STATE_STARTUP		0
+#define		STATE_USER_INPUT	1
+#define		STATE_COUNTING_DOWN	2
+#define		STATE_COUNTING_UP	3
+#define 	STATE_ALARM			4
+//Events
+#define		EVENT_BUTTONPRESSED	(1<<0)
 
 /*
  * Functional prototypes
  */
-void 			sys_init		(void);
-void 			init_io			(void);
-void 			init_timer		(void);
-void 			set_interrupts	(unsigned char state);
-
-
-void			shutdown		(void);
+void 			init_sys			(void);
+void 			init_state_machine	(void);
+void 			init_io				(void);
+void 			init_timer			(void);
+void 			set_interrupts		(unsigned char state);
+void			shutdown			(void);
+void 			state_machine		(void);
+void 			state_machine_notify(unsigned char event);
+void 			check_event			(unsigned char event, unsigned char next_state);
+void 			time2digit			(void);
 
 #endif /* OTIMER_H_ */

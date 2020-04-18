@@ -18,7 +18,7 @@
 /*
  * functional protoypes
  */
-void 			input_init		(void);
+void 			init_input		(void);
 void 			input_set_adc	(unsigned char state);
 void 			input_set_pin	(unsigned char pinnumber);
 void		 	input_sample	(void);

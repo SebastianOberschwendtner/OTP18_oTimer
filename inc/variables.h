@@ -41,4 +41,11 @@ typedef struct
 	unsigned char 	sample;
 }adc_t;
 
+
+//struct for state machine and system parameters
+typedef struct
+{
+	unsigned char state;
+	unsigned char event;
+}sys_t;
 #endif /* VARIABLES_H_ */

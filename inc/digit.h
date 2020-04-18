@@ -12,8 +12,7 @@
 /*
  * functional prototypes
  */
-void 			time_init		(void);
-void 			digit_init		(void);
+void 			init_digit		(void);
 void 			char2digit		(unsigned char data);
 void 			int2digit		(unsigned int data);
 void 			display_digit	(unsigned char digitnumber);

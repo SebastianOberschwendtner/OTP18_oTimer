@@ -12,6 +12,7 @@
 /*
  * functional prototypes
  */
+void			init_time		(void);
 unsigned char	time_count		(unsigned char direction);
 unsigned char 	get_digit_time	(unsigned char digitnumber);
 unsigned int 	get_time_int	(void);

@@ -12,7 +12,7 @@ adc_t* adc;
 /*
  * initialize the input peripherals
  */
-void input_init(void)
+void init_input(void)
 {
 	//Select AREF as reference voltage, left adjusted result
 	ADMUX = (1<<ADLAR);

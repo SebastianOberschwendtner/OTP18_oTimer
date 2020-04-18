@@ -43,7 +43,7 @@ typedef struct
 /*
  * Functional protoypes
  */
-void			scheduler_init	(void);
+void			init_scheduler	(void);
 void			schedule		(unsigned char task, unsigned int schedule);
 void 			set_task		(unsigned char task, unsigned char state);
 void 			count_task		(unsigned char task);

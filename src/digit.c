@@ -13,7 +13,7 @@ unsigned char current_digit = 0;
 /*
  * Initialize digits
  */
-void digit_init(void)
+void init_digit(void)
 {
 	//register memory
 	digits = ipc_memory_register(sizeof(digit_t),did_DIGIT);

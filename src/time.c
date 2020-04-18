@@ -12,7 +12,7 @@ time_t* systime;
 /*
  * init time
  */
-void time_init(void)
+void init_time(void)
 {
 	//register memory
 	systime = ipc_memory_register(sizeof(time_t),did_TIME);

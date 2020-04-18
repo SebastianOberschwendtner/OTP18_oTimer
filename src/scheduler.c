@@ -12,7 +12,7 @@ schedule_t* os;
 /*
  * initialize the os struct
  */
-void scheduler_init(void)
+void init_scheduler(void)
 {
 	//register memory
 	os = ipc_memory_register(sizeof(schedule_t),did_SCHEDULER);
