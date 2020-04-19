@@ -20,7 +20,7 @@ void init_time(void)
 
 /*
  * Count the time, has to be called every second.
- * Returns 1 when over or overflow occurred
+ * Returns 1 when over or underflow occurred
  */
 unsigned char time_count(unsigned char direction)
 {
@@ -67,15 +67,15 @@ unsigned char time_count(unsigned char direction)
 		//Count minutes
 		else if(systime->minute > 0)
 		{
-			systime->second = 60;
+			systime->second = 59;
 			systime->minute--;
 			return 0;
 		}
 		//Count hours
 		else if(systime->hour > 0)
 		{
-			systime->second = 60;
-			systime->minute = 60;
+			systime->second = 59;
+			systime->minute = 59;
 			systime->hour--;
 			return 0;
 		}
@@ -125,5 +125,22 @@ unsigned char get_digit_time(unsigned char digitnumber)
  */
 unsigned int get_time_int(void)
 {
-	return (systime->minute*100)+(systime->second);
-}
+	return (systime->hour*10000)+(systime->minute*100)+(systime->second);
+};
+
+/*
+ * Set the time specified by number of seconds
+ */
+void set_time(unsigned int seconds)
+{
+	//calculate hours
+	systime->hour = (unsigned char)(seconds/3600);
+
+	//calculate minutes
+	seconds = seconds - systime->hour*3600;
+	systime->minute = (unsigned char)(seconds/60);
+
+	//Calculate seconds
+	seconds = seconds - systime->minute*60;
+	systime->second = (unsigned char)(seconds);
+};

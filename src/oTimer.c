@@ -12,6 +12,9 @@ volatile unsigned char 	tickpassed = 0;
 //variable for the button
 volatile unsigned char button_pressed = 0;
 
+unsigned int new_time = 0;
+unsigned int old_time = 0;
+
 //variable for state machine
 sys_t* system;
 digit_t* digit;
@@ -31,7 +34,15 @@ void init_sys(void)
 
 	//register memory
 	system = ipc_memory_register(sizeof(sys_t),did_SYSTEM);
+
+	//initialize the watchdog timer for a timeout with an interrupt of approx. 8s
+	wdt_enable(WDTO_8S);
 };
+ISR(WDT_vect)
+{
+	//When the watchdog underflows, shut the system down
+	shutdown();
+}
 
 /*
  * initialize the state machine.
@@ -46,6 +57,7 @@ void init_state_machine(void)
 	digit 	= ipc_memory_get(did_DIGIT);
 	time 	= ipc_memory_get(did_TIME);
 	input 	= ipc_memory_get(did_INPUT);
+
 };
 
 /*
@@ -146,24 +158,53 @@ void state_machine(void)
 	{
 	case STATE_USER_INPUT:
 		//Perform actions for current state
-		char2digit(input->value[0]);
+		new_time = ((unsigned int)input->value[0]*10);
+		new_time += (unsigned int)input->value[1]*300;
 
-		//Check for state transitions
-		check_event(EVENT_BUTTONPRESSED,STATE_COUNTING_UP);
-		break;
+		//Pet the watchdog, when there was a change in the input
+		if(new_time != old_time)
+			wdt_reset();
+		old_time = new_time;
 
-	case STATE_COUNTING_DOWN:
+		set_time(new_time); 	//Update time input
+		time2digit(); 			//Display the time
+
+		//Check for state transitions and perform exit actions
+		if(check_event(EVENT_BUTTONPRESSED,STATE_COUNTING_DOWN))
+		{
+			set_task(TASK_COUNT_DOWN,ACTIVE); 	//Enable the counter task
+		}
 		break;
 
 	case STATE_COUNTING_UP:
-		//Perform actions for current state
-		time2digit();
+		break;
 
-		//Check for state transitions
-		check_event(EVENT_BUTTONPRESSED,STATE_USER_INPUT);
+	case STATE_COUNTING_DOWN:
+		//Perform actions for current state
+		time2digit();					//Display the counting time
+		wdt_reset();					//Reset the watchdog
+
+		//Check for state transitions and perform exit actions
+		if(check_event(EVENT_TIME_OVF,STATE_ALARM))
+		{
+			set_task(TASK_COUNT_DOWN,INACTIVE); 	//Disable the counter task
+			set_task(TASK_ALARM,ACTIVE);		//Enable the alarm task
+		}
+		else if(check_event(EVENT_BUTTONPRESSED,STATE_USER_INPUT))
+		{
+			set_task(TASK_COUNT_DOWN,INACTIVE); 	//Disable the counter task
+		}
 		break;
 
 	case STATE_ALARM:
+		//Perform actions for current state
+		wdt_reset();					//Reset the watchdog
+		//check for state transitions and perform exit actions
+		if(check_event(EVENT_BUTTONPRESSED,STATE_USER_INPUT))
+		{
+			set_task(TASK_ALARM,INACTIVE); 		//Disable the alarm task
+			set_alarm_out(OFF);					//Disable the alarm outputs
+		}
 		break;
 
 	default:
@@ -184,17 +225,21 @@ void state_machine_notify(unsigned char event)
 
 /*
  * Check whether a specific event occurred and go to the specified state
+ * Returns 1 to signal a state change
  */
-void check_event(unsigned char event, unsigned char next_state)
+unsigned char check_event(unsigned char event, unsigned char next_state)
 {
 	//check for event flags
 	if(system->event & event)
 	{
-		//Clear event flags
-		system->event &= ~event;
+		//Clear all event flags
+		system->event = 0;
 		//Goto next sate
 		system->state = next_state;
+		return 1;
 	}
+	else
+		return 0;
 };
 
 /*
@@ -207,10 +252,49 @@ void time2digit(void)
 	{
 		//Do not show 1 seconds
 		int2digit(get_time_int()/10);
+		set_dp(2);
+		if(time->hour)
+			set_dot(0,ON);
+		else
+			set_dot(0,OFF);
 	}
 	else
 	{
 		//Do show 1 seconds
 		int2digit(get_time_int());
+		set_dp(1);
+		set_dot(0,OFF);
 	}
 };
+
+/*
+ * execute the alarm, just toggle all output pins
+ */
+void alarm(void)
+{
+	digit->show[1] ^= 1;
+	digit->show[2] ^= 1;
+	digit->show[3] ^= 1;
+	set_alarm_out(TOGGLE);
+};
+
+/*
+ * Set the control pins for the alarm peripherals
+ */
+void set_alarm_out(unsigned char state)
+{
+	switch(state)
+	{
+	case ON:
+		PORTC |= PIN_BUZZ | PIN_VIB;
+		break;
+	case OFF:
+		PORTC &= ~(PIN_BUZZ | PIN_VIB);
+		break;
+	case TOGGLE:
+		PORTC ^= PIN_BUZZ | PIN_VIB;
+		break;
+	default:
+		break;
+	}
+}

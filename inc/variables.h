@@ -31,6 +31,7 @@ typedef struct
 	unsigned char dot[4];
 	unsigned char show[4];
 	unsigned char sign;
+	unsigned char dp;
 }digit_t;
 
 //struct for the values of the adc

@@ -49,22 +49,22 @@ void char2digit(unsigned char data)
 void int2digit(unsigned int data)
 {
 	//get the thousands
-	digits->value[0] = data/1000;
+	digits->value[0] = (unsigned char)(data/1000);
 	digits->show[0]  = digits->value[0];
 
 	//get the hundreds
 	data = data - (digits->value[0]*1000);
-	digits->value[1] = data/100;
+	digits->value[1] = (unsigned char)(data/100);
 	digits->show[1]  = 1;
 
 	//get the tens, subtract the known hundreds and divide by 10
 	data = data - (digits->value[1]*100);
-	digits->value[2] = data/10;
+	digits->value[2] = (unsigned char)(data/10);
 	digits->show[2]  = 1;
 
 	//get the ones, subtract the known tens and divide by 10
 	data = data - (digits->value[2]*10);
-	digits->value[3] = data;
+	digits->value[3] = (unsigned char)(data);
 	digits->show[3]  = 1;
 };
 
@@ -123,6 +123,42 @@ void set_dot(unsigned char dot, unsigned char state)
 		break;
 	case TOGGLE:
 			digits->dot[dot] ^= ON;
+		break;
+	default:
+		break;
+	}
+};
+
+/*
+ * set the position of the decimal place
+ */
+void set_dp(unsigned char place)
+{
+	//Disable the old dot, when the decimal place is changed
+	if(place != digits->dp)
+	{
+		digits->dot[digits->dp] = 0;
+
+		//Set the new active dot
+		digits->dp = place;
+	}
+};
+
+/*
+ * set the state of the decimal place
+ */
+void set_dp_state(unsigned char state)
+{
+	switch(state)
+	{
+	case ON:
+		digits->dot[digits->dp] = ON;
+		break;
+	case OFF:
+		digits->dot[digits->dp] = OFF;
+		break;
+	case TOGGLE:
+			digits->dot[digits->dp] ^= ON;
 		break;
 	default:
 		break;

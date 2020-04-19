@@ -9,6 +9,7 @@
 #define OTIMER_H_
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <avr/wdt.h>
 
 #include "ipc.h"
 #include "scheduler.h"
@@ -29,7 +30,9 @@
 #define TASK_INPUT			TASK1
 #define TASK_BUTTON			TASK2
 #define TASK_BLINK			TASK3
-#define TASK_COUNT			TASK4
+#define TASK_COUNT_UP		TASK4
+#define TASK_COUNT_DOWN		TASK5
+#define TASK_ALARM			TASK6
 
 /*
  * Define Pins
@@ -85,6 +88,7 @@
 #define 	STATE_ALARM			4
 //Events
 #define		EVENT_BUTTONPRESSED	(1<<0)
+#define		EVENT_TIME_OVF		(1<<1)
 
 /*
  * Functional prototypes
@@ -97,7 +101,9 @@ void 			set_interrupts		(unsigned char state);
 void			shutdown			(void);
 void 			state_machine		(void);
 void 			state_machine_notify(unsigned char event);
-void 			check_event			(unsigned char event, unsigned char next_state);
+unsigned char	check_event			(unsigned char event, unsigned char next_state);
 void 			time2digit			(void);
+void 			alarm				(void);
+void 			set_alarm_out		(unsigned char state);
 
 #endif /* OTIMER_H_ */

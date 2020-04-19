@@ -10,7 +10,7 @@
 #include "oTimer.h"
 
 //How many tasks do you want?
-#define NUM_TASKS	5
+#define NUM_TASKS	7
 
 //struct for task information
 typedef struct
